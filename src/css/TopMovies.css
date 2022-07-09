@@ -1,0 +1,10 @@
+.container {
+    margin: 0 auto;
+    padding: 50px;
+}
+
+.topMovies {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+}

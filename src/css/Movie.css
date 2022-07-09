@@ -1,0 +1,8 @@
+.movie {
+    color: white;
+    display: flex;
+}
+
+.movie img {
+    max-height: 50vh;
+}
