@@ -7,11 +7,11 @@ import './css/App.css'
 function App() {
   return (
     <>
-    <Header/>
-    <Routes>
-      <Route path="/" element={ <MainPage/> } />
-    </Routes>
-    <Footer/>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+      <Footer />
     </>
   );
 }
