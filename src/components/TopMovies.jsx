@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from './Movie';
 import '../css/TopMovies.css'
+import MovieDesc from './MovieDesc';
 
 class TopMovies extends React.Component {
   constructor(props) {
@@ -50,18 +51,19 @@ class TopMovies extends React.Component {
       console.log(films)
       return (
         <div className='container'>
+          <div className='description__wrapper'>
+            <div className='topMovies'>
+              {films.map(film => (
 
-          <div className='topMovies'>
-            {films.map(film => (
-
-              <Movie
-                key={film.filmId}
-                name={film.nameRu}
-                rating={film.rating}
-                genres={film.genres}
-                foto={film.posterUrl}
-              />
-            ))}
+                <Movie
+                  key={film.filmId}
+                  name={film.nameRu}
+                  rating={film.rating}
+                  genres={film.genres}
+                  foto={film.posterUrl}
+                />
+              ))}
+            </div>
           </div>
         </div>
       );
