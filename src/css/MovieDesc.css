@@ -1,0 +1,7 @@
+.description {
+    padding: 10px;
+}
+
+.description>* {
+    margin-bottom: 15px;
+}

@@ -1,24 +1,28 @@
 import React from "react";
 import '../css/MovieDesc.css';
-
-const API_URL = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/';
-
-const fetchData = async () => {
-    const result = await fetch(`${API_URL}`);
-    const data = await result.json();
-    console.log(data);
-}
-fetchData();
-
+import { useGetDescription } from "../hooks/useGetDescription";
 
 const MovieDesc = (props) => {
+    const {
+        items: items
+    } = useGetDescription();
+    console.log(items);
+
+    let {
+        description,
+        ratingImdb: imdbRate,
+        ratingKinopoisk: kpRate,
+        year,
+        filmLength,
+    } = items;
+
     return (
         <div className='description'>
-            <div className="description__text">ddfgdfg</div>
-            <div className="description__kpRate">dfgdfg</div>
-            <div className="description__imdbRate">dfgdfg</div>
-            <div className="description__year">dfgdfg</div>
-            <div className="description__duration">dfgdfg</div>
+            <div className="description__text">Описание: {description}</div>
+            <div className="description__kpRate">Кинопоиск: {kpRate}</div>
+            <div className="description__imdbRate">IBDb:{imdbRate}</div>
+            <div className="description__year">Год выпуска: {year}</div>
+            <div className="description__duration">Длительность: {filmLength} мин</div>
         </div>
     );
 }

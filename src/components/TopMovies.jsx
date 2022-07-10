@@ -1,7 +1,6 @@
 import React from 'react';
 import Movie from './Movie';
 import '../css/TopMovies.css'
-import MovieDesc from './MovieDesc';
 
 class TopMovies extends React.Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class TopMovies extends React.Component {
     fetch(URL, {
       method: 'GET',
       headers: {
-        'X-API-KEY': 'ef6ec7cf-6925-4368-87f7-7f919e3b26c1',
+        'X-API-KEY': '6189fc94-f92f-49e4-add4-368fbca3c2e0',
         'Content-Type': 'application/json',
       },
     })
