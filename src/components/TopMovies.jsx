@@ -1,75 +1,67 @@
-import React from 'react';
-import Movie from './Movie';
-import '../css/TopMovies.css'
+import React, { useEffect, useState } from 'react';
+import { Movie } from './Movie';
+import '../css/TopMovies.css';
 
-class TopMovies extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      films: {}
-    };
-  }
+import { getTopFilms, getFilmData } from '../utils/api';
 
-  componentDidMount() {
-    const URL = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top';
-    fetch(URL, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': '6189fc94-f92f-49e4-add4-368fbca3c2e0', //6189fc94-f92f-49e4-add4-368fbca3c2e0  cc5bbf2a-79b9-4de6-a091-234be04f22a8
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            films: result.films
-          });
-        },
-        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        // чтобы не перехватывать исключения из ошибок в самих компонентах.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
+const apiTimeout = (i) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve();
+    }, 100 * i);
+  });
+};
 
-  render() {
-    const { error, isLoaded, films } = this.state;
-    if (error) {
-      return <div>Ошибка: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Загрузка...</div>;
-    } else {
-      console.log(films)
-      return (
-        <div className='container'>
-          <div className='description__wrapper'>
-            <div className='topMovies'>
-              {films.map(film => (
+export const TopMovies = () => {
+  const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [films, setFilms] = useState(null);
 
-                <Movie
-                  key={film.filmId}
-                  id={film.filmId}
-                  name={film.nameRu}
-                  rating={film.rating}
-                  genres={film.genres}
-                  foto={film.posterUrl}
-                />
-              ))}
-            </div>
+  useEffect(() => {
+    async function fetchFilms() {
+      try {
+        const result = await getTopFilms();
+        const data = await Promise.all(
+          result.films.map(async (film, i) => {
+            await apiTimeout(i);
+            const extra = await getFilmData(film.filmId);
+            return { ...film, extra };
+          }),
+        );
+        setFilms(data);
+        console.log(data);
+      } catch (error) {
+        setError(error.message);
+      }
+      setLoaded(true);
+    }
+    fetchFilms(films);
+  }, []);
+
+  if (error) {
+    return <div>Ошибка: {error.message}</div>;
+  } else if (!loaded) {
+    return <div>Загрузка...</div>;
+  } else {
+    console.log(films);
+    return (
+      <div className="container">
+        <div className="description__wrapper">
+          <div className="topMovies">
+            {films.map((film) => (
+              <Movie
+                key={film.filmId}
+                id={film.filmId}
+                name={film.nameRu}
+                extra={film.extra}
+                rating={film.rating}
+                genres={film.genres}
+                foto={film.posterUrl}
+              />
+            ))}
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
-}
-
-
-export default TopMovies;
+};
