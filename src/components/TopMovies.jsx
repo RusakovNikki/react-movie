@@ -1,85 +1,59 @@
-import React from 'react';
-import Movie from './Movie';
-import '../css/TopMovies.css'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Movie } from './Movie';
+import '../css/TopMovies.css';
 
+import { getTopFilms, getFilmData } from '../utils/api';
 
-class TopMovies extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      films: [],
-      counter: 1,
-      scrolled: false
-    };
-  }
-  
-  componentDidMount = () => {this.viewTop()}
+const apiTimeout = (i) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      return resolve();
+    }, 100 * i);
+  });
+};
 
-  viewTop() {
-    this.setState({ counter: this.state.counter + 1 });
-    console.log('componentDidMount()');
-    const URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${this.state.counter}`;
-    fetch(URL, {
-      method: 'GET',
-      headers: {
-        'X-API-KEY': '8c8e1a50-6322-4135-8875-5d40a5420d86',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            films: [...this.state.films, ...result.films]
-          });
+export const TopMovies = () => {
+  const [error, setError] = useState(null);
+  const [loaded, setLoaded] = useState(false);
+  const [films, setFilms] = useState(null);
 
-        },
-        // Примечание: важно обрабатывать ошибки именно здесь, а не в блоке catch(),
-        // чтобы не перехватывать исключения из ошибок в самих компонентах.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-
-    document.addEventListener('scroll', this.scrollHandler)
-
-  }
-
-  scrollHandler = (e) => {
-    if(e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 300) {
-      console.log(this.state.counter);
-      if(!this.state.scrolled && this.state.counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
-        this.viewTop();
-        this.setState({ scrolled: true });
-        setTimeout(() => {this.setState({ scrolled: false })}, 3000);
+  useEffect(() => {
+    async function fetchFilms() {
+      try {
+        const result = await getTopFilms();
+        const data = await Promise.all(
+          result.films.map(async (film, i) => {
+            await apiTimeout(i);
+            const extra = await getFilmData(film.filmId);
+            return { ...film, extra };
+          }),
+        );
+        setFilms(data);
+        console.log(data);
+      } catch (error) {
+        setError(error.message);
       }
+      setLoaded(true);
     }
-  }
-  render() {
-    const { error, isLoaded, films } = this.state;
-    if (error) {
-      return <div>Ошибка: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Загрузка...</div>;
-    } else {
-      console.log(films)
-      return (
-        <div className='container'>
+    fetchFilms(films);
+  }, []);
 
+  if (error) {
+    return <div>Ошибка: {error.message}</div>;
+  } else if (!loaded) {
+    return <div>Загрузка...</div>;
+  } else {
+    console.log(films);
+    return (
+      <div className='container'>
+        <div className='description__wrapper'>
           <div className='topMovies'>
-            {films.map(film => (
-
+            {films.map((film) => (
               <Movie
                 key={film.filmId}
+                id={film.filmId}
                 name={film.nameRu}
+                extra={film.extra}
                 rating={film.rating}
                 genres={film.genres}
                 foto={film.posterUrl}
@@ -87,10 +61,7 @@ class TopMovies extends React.Component {
             ))}
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
-}
-
-
-export default TopMovies;
+};
