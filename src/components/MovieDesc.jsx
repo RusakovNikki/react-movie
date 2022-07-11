@@ -5,8 +5,7 @@ import { useGetDescription } from "../hooks/useGetDescription";
 const MovieDesc = (props) => {
     const {
         items: items
-    } = useGetDescription();
-    console.log(items);
+    } = useGetDescription(props.id);
 
     let {
         description,

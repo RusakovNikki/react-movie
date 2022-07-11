@@ -14,7 +14,7 @@ const Movie = (props) => {
         <p> {genresStr}</p>
       </div>
       <div className='movie__hoverDesc'>
-        <MovieDesc />
+        <MovieDesc id={props.id} />
       </div>
     </div>
   );
