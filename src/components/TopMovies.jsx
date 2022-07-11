@@ -45,9 +45,9 @@ export const TopMovies = () => {
   } else {
     console.log(films);
     return (
-      <div className="container">
-        <div className="description__wrapper">
-          <div className="topMovies">
+      <div className='container'>
+        <div className='description__wrapper'>
+          <div className='topMovies'>
             {films.map((film) => (
               <Movie
                 key={film.filmId}
