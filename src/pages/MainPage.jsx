@@ -5,7 +5,7 @@ import { TopMovies } from '../components/TopMovies';
 
 const MainPage = () => {
   return (
-    <div className="pageBody">
+    <div className='pageBody'>
       <Slider />
       <TopMovies />
     </div>
