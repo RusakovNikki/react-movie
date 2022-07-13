@@ -12,31 +12,50 @@ const apiTimeout = (i) => {
   });
 };
 
-export const TopMovies = () => {
-  const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [films, setFilms] = useState(null);
 
-  useEffect(() => {
-    async function fetchFilms() {
-      try {
-        const result = await getTopFilms();
-        const data = await Promise.all(
-          result.films.map(async (film, i) => {
-            await apiTimeout(i);
-            const extra = await getFilmData(film.filmId);
-            return { ...film, extra };
-          }),
-        );
-        setFilms(data);
-        console.log(data);
-      } catch (error) {
-        setError(error.message);
-      }
-      setLoaded(true);
+export const TopMovies = (props) => {
+  const [error, setError] = props.error;
+  const [loaded, setLoaded] = props.loaded;
+  const [films, setFilms] = props.films;
+  let [scrolled, setScrolled] = useState(false)
+  let [counter, setCounter] = useState(1)
+
+  async function fetchFilms() {
+    try {
+      const result = await getTopFilms(counter);
+      const data = await Promise.all(
+        result.films.map(async (film, i) => {
+          await apiTimeout(i);
+          const extra = await getFilmData(film.filmId);
+          return { ...film, extra };
+        }),
+      );
+      setFilms([...films, ...data]);
+      console.log(typeof films);
+      console.log(typeof data);
+    } catch (error) {
+      setError(error.message);
     }
-    fetchFilms(films);
+    setLoaded(true);
+  }
+
+  document.addEventListener('scroll', e => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
+      if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
+        setCounter(++counter);
+        debugger
+        fetchFilms();
+        setScrolled(scrolled = true)
+        setTimeout(() => { setScrolled(scrolled = false) }, 10000);
+      }
+    }
+  })
+
+  useEffect(() => { 
+    debugger
+    fetchFilms(films); 
   }, []);
+
 
   if (error) {
     return <div>Ошибка: {error.message}</div>;
