@@ -8,7 +8,7 @@ const apiTimeout = (i) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve();
-    }, 200 * i);
+    }, 100 * i);
   });
 };
 
@@ -39,7 +39,7 @@ export const TopMovies = (props) => {
     setLoaded(true);
   }
 
-  const scrollHandler = (e) => {
+  document.addEventListener('scroll', e => {
     if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
       if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
         setCounter(++counter);
@@ -49,8 +49,7 @@ export const TopMovies = (props) => {
         setTimeout(() => { setScrolled(scrolled = false) }, 10000);
       }
     }
-  }
-  document.addEventListener('scroll', scrollHandler)
+  })
 
   useEffect(() => { 
     debugger

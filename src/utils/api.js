@@ -29,25 +29,3 @@ export const getFilmData = async (id) => {
   }
 };
 
-export async function fetchFilms() {
-  const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [films, setFilms] = useState([]);
-
-  try {
-    const result = await getTopFilms(counter);
-    const data = await Promise.all(
-      result.films.map(async (film, i) => {
-        await apiTimeout(i);
-        const extra = await getFilmData(film.filmId);
-        return { ...film, extra };
-      }),
-    );
-    setFilms([...films, ...data]);
-    console.log(typeof films);
-    console.log(typeof data);
-  } catch (error) {
-    setError(error.message);
-  }
-  setLoaded(true);
-}
