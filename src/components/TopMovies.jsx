@@ -13,10 +13,10 @@ const apiTimeout = (i) => {
 };
 
 
-export const TopMovies = () => {
-  const [error, setError] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-  const [films, setFilms] = useState([]);
+export const TopMovies = (props) => {
+  const [error, setError] = props.error;
+  const [loaded, setLoaded] = props.loaded;
+  const [films, setFilms] = props.films;
   let [scrolled, setScrolled] = useState(false)
   let [counter, setCounter] = useState(1)
 
@@ -43,6 +43,7 @@ export const TopMovies = () => {
     if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
       if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
         setCounter(++counter);
+        debugger
         fetchFilms();
         setScrolled(scrolled = true)
         setTimeout(() => { setScrolled(scrolled = false) }, 10000);
