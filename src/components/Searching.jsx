@@ -15,10 +15,12 @@ const Searching = (props) => {
     const [loaded, setLoaded] = props.loaded;
     const [films, setFilms] = props.films;
     const [value, setValue] = useState('')
+    const [searching, setSearching] = props.searching;
 
     const requestSearch = (e) => {
         let urlSearch = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${value}`
         fetchFilms(urlSearch);
+        setSearching(true)
     }
     async function fetchFilms(urlSearch) {
         try {

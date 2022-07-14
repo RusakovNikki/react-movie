@@ -9,7 +9,7 @@ const Header = (props) => {
       <div className='menuContainer'>
         <Link to='/'>Главная</Link>
       </div>
-      <Searching error={props.error} loaded={props.loaded} films={props.films}/>
+      <Searching error={props.error} loaded={props.loaded} films={props.films} searching={props.searching} />
     </div>
   );
 };
