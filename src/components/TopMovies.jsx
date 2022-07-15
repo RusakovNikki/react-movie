@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Movie } from './Movie';
 import '../css/TopMovies.css';
 
@@ -19,6 +19,19 @@ export const TopMovies = (props) => {
   const [films, setFilms] = props.films;
   let [scrolled, setScrolled] = useState(false)
   let [counter, setCounter] = useState(1)
+  const [searching, setSearching] = props.searching;
+  let filmsState = [];
+
+  const scrollHandler = useCallback( e => {
+    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
+      if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
+        setCounter(++counter);
+        fetchFilms();
+        setScrolled(scrolled = true)
+        setTimeout(() => { setScrolled(scrolled = false) }, 4000);
+      }
+    }
+  }, [])
 
   async function fetchFilms() {
     try {
@@ -30,31 +43,32 @@ export const TopMovies = (props) => {
           return { ...film, extra };
         }),
       );
-      setFilms([...films, ...data]);
-      console.log(typeof films);
-      console.log(typeof data);
+      setFilms([...filmsState, ...data]);
+      filmsState = [...filmsState, ...data]
+      console.log(films);
+      console.log(data);
+      console.log(filmsState);
     } catch (error) {
       setError(error.message);
     }
     setLoaded(true);
   }
 
-  document.addEventListener('scroll', e => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
-      if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
-        setCounter(++counter);
-        debugger
-        fetchFilms();
-        setScrolled(scrolled = true)
-        setTimeout(() => { setScrolled(scrolled = false) }, 10000);
-      }
-    }
-  })
+  useEffect(() => {
+    document.removeEventListener('scroll', scrollHandler)
+  }, [props.searching[0]]);
 
-  useEffect(() => { 
-    debugger
-    fetchFilms(films); 
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+    return () => document.removeEventListener('scroll', scrollHandler)
   }, []);
+
+
+  useEffect(() => {
+    fetchFilms();
+  }, []);
+
+
 
 
   if (error) {
@@ -64,21 +78,19 @@ export const TopMovies = (props) => {
   } else {
     console.log(films);
     return (
-      <div className='container'>
-        <div className='description__wrapper'>
-          <div className='topMovies'>
-            {films.map((film) => (
-              <Movie
-                key={film.filmId}
-                id={film.filmId}
-                name={film.nameRu}
-                extra={film.extra}
-                rating={film.rating}
-                genres={film.genres}
-                foto={film.posterUrl}
-              />
-            ))}
-          </div>
+      <div className='description__wrapper'>
+        <div className='topMovies'>
+          {films.map((film) => (
+            <Movie
+              key={film.filmId}
+              id={film.filmId}
+              name={film.nameRu}
+              extra={film.extra}
+              rating={film.rating}
+              genres={film.genres}
+              foto={film.posterUrl}
+            />
+          ))}
         </div>
       </div>
     );
