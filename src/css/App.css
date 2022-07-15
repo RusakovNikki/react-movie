@@ -20,3 +20,12 @@
 .background-main {
   background: #2c2b30;
 }
+
+.background-footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  background-color: #1A191E;
+  z-index: 100;
+}

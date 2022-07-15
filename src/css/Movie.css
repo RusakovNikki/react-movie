@@ -1,18 +1,12 @@
 .movie {
     width: 240px;
-    margin: 10px;
+    margin: 20px 10px 10px;
     color: white;
     position: relative;
     transition: background-color .3s ease-in-out;
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
-
-/* .movie img:hover {
-    background-color: black;
-    opacity: 0.9;
-    transition: 0.4s;
-} */
 
 .movie__dark__hover {
     position: absolute;
@@ -62,8 +56,27 @@
     z-index: 99;
     opacity: 1;
     width: 100%;
+    height: 200px;
     transition: background-color .3s ease-in-out, visibility .1s ease-in;
 }
+
+
+/* scroll */
+.movie__hoverDesc {
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+.movie__hoverDesc::-webkit-scrollbar {
+	width: 6px;
+}
+.movie__hoverDesc::-webkit-scrollbar-trak {
+	background: linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 40%, rgba(154,154,154,1) 40%, rgba(154,154,154,1) 50%, rgba(154,154,154,1) 60%, rgba(255,255,255,0.02) 60%, rgba(255,255,255,0.02) 100%);
+}
+.movie__hoverDesc::-webkit-scrollbar-thumb {
+	background: #777;
+}
+/* end scroll */
+
 
 .movie__genre {
     color: #ffd80e;

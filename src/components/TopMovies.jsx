@@ -54,18 +54,6 @@ export const TopMovies = (props) => {
     setLoaded(true);
   }
 
-  // const scrollHandler = e => {
-  //   if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
-  //     if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
-  //       setCounter(++counter);
-  //       fetchFilms();
-  //       setScrolled(scrolled = true)
-  //       setTimeout(() => { setScrolled(scrolled = false) }, 10000);
-  //     }
-  //   }
-  // }
-
-
   useEffect(() => {
     document.removeEventListener('scroll', scrollHandler)
   }, [props.searching[0]]);

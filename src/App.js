@@ -25,7 +25,11 @@ function App() {
           </Routes>
         </div>
       </div>
-      <Footer />
+      <div className='background-footer'>
+        <div className='container'>
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
