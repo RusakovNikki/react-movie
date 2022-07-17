@@ -16,13 +16,11 @@ const apiTimeout = (i) => {
 
 
 export const TopMovies = (props) => {
-  console.log(props);
   const [error, setError] = props.error;
   const [loaded, setLoaded] = props.loaded;
   const [films, setFilms] = props.films;
-  let [scrolled, setScrolled] = useState(false);
-  // let [correctId, setId] = props.correctFilmId;
-  let [counter, setCounter] = useState(1);
+  let [scrolled, setScrolled] = useState(false)
+  let [counter, setCounter] = useState(1)
   const [searching, setSearching] = props.searching;
   let filmsState = [];
 
@@ -90,7 +88,6 @@ export const TopMovies = (props) => {
               rating={film.rating}
               genres={film.genres}
               foto={film.posterUrl}
-              correctFilmId={props.correctFilmId}
             />
           ))}
         </div>
