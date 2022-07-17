@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Movie } from './Movie';
 import '../css/TopMovies.css';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 import { getTopFilms, getFilmData } from '../utils/api';
 
@@ -14,11 +16,13 @@ const apiTimeout = (i) => {
 
 
 export const TopMovies = (props) => {
+  console.log(props);
   const [error, setError] = props.error;
   const [loaded, setLoaded] = props.loaded;
   const [films, setFilms] = props.films;
-  let [scrolled, setScrolled] = useState(false)
-  let [counter, setCounter] = useState(1)
+  let [scrolled, setScrolled] = useState(false);
+  // let [correctId, setId] = props.correctFilmId;
+  let [counter, setCounter] = useState(1);
   const [searching, setSearching] = props.searching;
   let filmsState = [];
 
@@ -56,19 +60,16 @@ export const TopMovies = (props) => {
 
   useEffect(() => {
     document.removeEventListener('scroll', scrollHandler)
-  }, [props.searching[0]]);
+  }, [searching]);
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
     return () => document.removeEventListener('scroll', scrollHandler)
   }, []);
 
-
   useEffect(() => {
     fetchFilms();
   }, []);
-
-
 
 
   if (error) {
@@ -89,6 +90,7 @@ export const TopMovies = (props) => {
               rating={film.rating}
               genres={film.genres}
               foto={film.posterUrl}
+              correctFilmId={props.correctFilmId}
             />
           ))}
         </div>
