@@ -3,3 +3,13 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+.preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unvisible {
+    display: none;
+}
