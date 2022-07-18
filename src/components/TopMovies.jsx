@@ -1,8 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Movie } from './Movie';
 import '../css/TopMovies.css';
+import 'aos/dist/aos.css';
+import Aos from 'aos';
+import spinner from '../images/spinner.svg'
 
 import { getTopFilms, getFilmData } from '../utils/api';
+import { Link } from 'react-router-dom';
 
 const apiTimeout = (i) => {
   return new Promise((resolve) => {
@@ -19,14 +23,17 @@ export const TopMovies = (props) => {
   const [films, setFilms] = props.films;
   let [scrolled, setScrolled] = useState(false)
   let [counter, setCounter] = useState(1)
+  const ref = useRef(null);
   const [searching, setSearching] = props.searching;
   let filmsState = [];
 
-  const scrollHandler = useCallback( e => {
+  const scrollHandler = useCallback(e => {
     if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
       if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
         setCounter(++counter);
+        setTimeout(() => ref.current.className = 'preloader', 1000);
         fetchFilms();
+        setTimeout(() => ref.current.className = 'preloader unvisible', 3000);
         setScrolled(scrolled = true)
         setTimeout(() => { setScrolled(scrolled = false) }, 4000);
       }
@@ -56,42 +63,45 @@ export const TopMovies = (props) => {
 
   useEffect(() => {
     document.removeEventListener('scroll', scrollHandler)
-  }, [props.searching[0]]);
+  }, [searching]);
 
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
     return () => document.removeEventListener('scroll', scrollHandler)
   }, []);
 
-
   useEffect(() => {
     fetchFilms();
   }, []);
 
 
-
-
   if (error) {
     return <div>Ошибка: {error.message}</div>;
   } else if (!loaded) {
-    return <div>Загрузка...</div>;
+    return <div className='preloader'>
+      <img src={spinner} width="150" height="150" />
+    </div>;
   } else {
     console.log(films);
     return (
       <div className='description__wrapper'>
         <div className='topMovies'>
           {films.map((film) => (
-            <Movie
-              key={film.filmId}
-              id={film.filmId}
-              name={film.nameRu}
-              extra={film.extra}
-              rating={film.rating}
-              genres={film.genres}
-              foto={film.posterUrl}
-            />
+            <Link key={film.filmId} to={`/film/${film.filmId}`}>
+              <Movie
+                key={film.filmId}
+                id={film.filmId}
+                name={film.nameRu}
+                extra={film.extra}
+                rating={film.rating}
+                genres={film.genres}
+                foto={film.posterUrl}
+              />
+            </Link>
+
           ))}
         </div>
+        <div className='preloader unvisible' ref={ref}><img src={spinner} width="100" height="100" /></div>
       </div>
     );
   }

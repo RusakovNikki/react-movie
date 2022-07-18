@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import MainPage from "./pages/MainPage";
 import './css/App.css'
+import AboutFilm from './pages/AboutFilm';
 
 function App() {
   const error = useState(null);
@@ -22,6 +23,7 @@ function App() {
         <div className='container'>
           <Routes>
             <Route path="/" element={<MainPage error={error} loaded={loaded} films={films} searching={searching} />} />
+            <Route path="/film/:id" element={<AboutFilm />} />
           </Routes>
         </div>
       </div>

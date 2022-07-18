@@ -18,7 +18,8 @@ const Searching = (props) => {
     const [searching, setSearching] = props.searching;
 
     const requestSearch = (e) => {
-        let urlSearch = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${value}`
+        let urlSearch = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${value}`;
+        setLoaded(false)
         fetchFilms(urlSearch);
         setSearching(true)
     }

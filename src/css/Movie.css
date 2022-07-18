@@ -25,7 +25,7 @@
 
 .movie img {
     /* max-height: 50vh; */
-    max-width: 240px;
+    width: 240px;
     height: 360px;
     border-radius: 15px;
 }
