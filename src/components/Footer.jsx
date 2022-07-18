@@ -4,7 +4,7 @@ import '../css/Footer.css'
 const Footer = () => {
   return (
     <div className='footerContainer'>
-      © Rusakov Nikita, Anastasia Soboleva, Julia, Ilya Ivanov
+      © Rusakov Nikita, Anastasia Soboleva, Julia Kiriushina, Ilya Ivanov
     </div>
   );
 };
