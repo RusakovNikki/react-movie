@@ -7,8 +7,9 @@ import spinner from '../images/spinner.svg'
 
 import { getTopFilms, getFilmData } from '../utils/api';
 import { Link } from 'react-router-dom';
+import { fetchMovieId } from '../functions/fetchMovieId';
 
-const apiTimeout = (i) => {
+export const apiTimeout = (i) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve();
@@ -73,7 +74,6 @@ export const TopMovies = (props) => {
   useEffect(() => {
     fetchFilms();
   }, []);
-
 
   if (error) {
     return <div>Ошибка: {error.message}</div>;
