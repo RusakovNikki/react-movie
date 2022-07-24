@@ -4,6 +4,8 @@ import { fetchTrailer } from "../functions/fetchTrailer";
 import { fetchFacts } from "../functions/fetchFacts";
 import Fact from "../components/Fact";
 import { getAwards } from "../utils/api";
+import { fetchAwards } from "../functions/fetchAwards";
+import Award from "../components/Award";
 
 const AboutFilm = (props) => {
     const { id } = useParams();
@@ -13,15 +15,17 @@ const AboutFilm = (props) => {
     /*Получить дополнительную информацию по фильму*/
     let [trailers, setTrailers] = props.trailers;
     let [facts, setFacts] = props.facts;
+    let [awards, setAwards] = props.awards;
 
     useEffect(() => {
         const fetchAdditionalData = async () => {
             const trailer = await fetchTrailer(id);
             const facts = await fetchFacts(id);
-            const awards = await getAwards(id);
-            console.log('Awards: ', awards);
+            const awards = await fetchAwards(id);
             setTrailers(trailer);
             setFacts(facts);
+            setAwards(awards);
+            console.log('Awards: ', awards);
         }
         fetchAdditionalData();
     }, []);
@@ -68,6 +72,14 @@ const AboutFilm = (props) => {
                     </div>
                     <div className="awards__wrapper">
                         <h2>Награды:</h2>
+                        {awards.map(award => (
+                            <Award
+                                name={award.name}
+                                nominationName={award.nominationName}
+                                imageUrl={award.imageUrl}
+                                year={award.year}
+                            />
+                        ))}
                     </div>
 
                 </>
