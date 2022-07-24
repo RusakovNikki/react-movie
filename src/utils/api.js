@@ -1,5 +1,5 @@
 const API_URL = 'https://kinopoiskapiunofficial.tech/api/v2.2';
-const API_KEY = '6189fc94-f92f-49e4-add4-368fbca3c2e0';
+const API_KEY = 'cc5bbf2a-79b9-4de6-a091-234be04f22a8';
 
 export const getTopFilms = async (page = 1) => {
   const url = typeof (page) === 'number' ? `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${page}` : page;

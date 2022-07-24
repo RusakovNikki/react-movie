@@ -4,11 +4,7 @@ export const getOrderedArray = (arr) => {
         prev[item.name].push(item);
         return prev;
     }, {});
-
-    Object.keys(orderedArray).forEach(key => {
-        let name = orderedArray[key].name;
-        let nominationName = orderedArray[key].nominationName;
-        console.log('Name: ', name, 'Nomination: ', nominationName);
-    })
     return orderedArray;
 }
+
+/*Эта функция мне нужна, чтобы потом упорядочить массив с наградами из API для последующей группировки, не удаляйте. (Юля)*/
