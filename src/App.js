@@ -10,7 +10,10 @@ function App() {
   const error = useState(null);
   const loaded = useState(false);
   const films = useState([]);
-  let searching = useState(false)
+  let searching = useState(false);
+  const trailers = useState([]);
+  const facts = useState([]);
+  const awards = useState([]);
 
   return (
     <div className="wrapper">
@@ -23,7 +26,7 @@ function App() {
         <div className='container'>
           <Routes>
             <Route path="/" element={<MainPage error={error} loaded={loaded} films={films} searching={searching} />} />
-            <Route path="/film/:id" element={<AboutFilm />} />
+            <Route path="/film/:id" element={<AboutFilm trailers={trailers} facts={facts} awards={awards} />} />
           </Routes>
         </div>
       </div>

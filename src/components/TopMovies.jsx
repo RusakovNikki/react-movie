@@ -2,13 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Movie } from './Movie';
 import '../css/TopMovies.css';
 import 'aos/dist/aos.css';
-import Aos from 'aos';
 import spinner from '../images/spinner.svg'
-
 import { getTopFilms, getFilmData } from '../utils/api';
 import { Link } from 'react-router-dom';
 
-const apiTimeout = (i) => {
+export const apiTimeout = (i) => {
   return new Promise((resolve) => {
     setTimeout(() => {
       return resolve();
@@ -52,9 +50,6 @@ export const TopMovies = (props) => {
       );
       setFilms([...filmsState, ...data]);
       filmsState = [...filmsState, ...data]
-      console.log(films);
-      console.log(data);
-      console.log(filmsState);
     } catch (error) {
       setError(error.message);
     }
@@ -73,7 +68,6 @@ export const TopMovies = (props) => {
   useEffect(() => {
     fetchFilms();
   }, []);
-
 
   if (error) {
     return <div>Ошибка: {error.message}</div>;
