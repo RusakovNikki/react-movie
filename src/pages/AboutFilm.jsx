@@ -1,28 +1,38 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from 'react'
-import { getAwards, getFacts, getTrailers } from "../utils/api";
 import { fetchTrailer } from "../functions/fetchTrailer";
+import { fetchFacts } from "../functions/fetchFacts";
+import Fact from "../components/Fact";
+import { getAwards } from "../utils/api";
 
 const AboutFilm = (props) => {
     const { id } = useParams();
     let [about, setAbout] = useState(null);
     let URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`;
 
-    /*Получить трейлер*/
+    /*Получить дополнительную информацию по фильму*/
+    let [trailers, setTrailers] = props.trailers;
+    let [facts, setFacts] = props.facts;
 
+    useEffect(() => {
+        const fetchAdditionalData = async () => {
+            const trailer = await fetchTrailer(id);
+            const facts = await fetchFacts(id);
+            const awards = await getAwards(id);
+            console.log('Awards: ', awards);
+            setTrailers(trailer);
+            setFacts(facts);
+        }
+        fetchAdditionalData();
+    }, []);
 
-    /*    const awards = await getAwards(id);
-       const facts = await getFacts(id); */
-
-    const trailer = fetchTrailer(id);
-
-
+    /******************************************************/
 
     useEffect(() => {
         fetch(URL, {
             method: 'GET',
             headers: {
-                'X-API-KEY': 'cc5bbf2a-79b9-4de6-a091-234be04f22a8', //6189fc94-f92f-49e4-add4-368fbca3c2e0  cc5bbf2a-79b9-4de6-a091-234be04f22a8 954630cb-a912-442d-93bd-453fafd8d36b 8c8e1a50-6322-4135-8875-5d40a5420d86
+                'X-API-KEY': '6189fc94-f92f-49e4-add4-368fbca3c2e0', //6189fc94-f92f-49e4-add4-368fbca3c2e0  cc5bbf2a-79b9-4de6-a091-234be04f22a8 954630cb-a912-442d-93bd-453fafd8d36b 8c8e1a50-6322-4135-8875-5d40a5420d86
                 'Content-Type': 'application/json',
             },
         })
@@ -42,16 +52,29 @@ const AboutFilm = (props) => {
                     <iframe
                         width="560"
                         height="315"
-                        src={trailer}
+                        src={trailers}
                         title="YouTube video player"
-                        frameborder="0"
+                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
+                        allowFullScreen>
                     </iframe>
-                </>
-            )}
+                    <div className="facts__wrapper">
+                        <h2>Факты о фильме:</h2>
+                        {facts.map(fact => (
+                            <Fact
+                                facts={fact}
+                            />
+                        ))}
+                    </div>
+                    <div className="awards__wrapper">
+                        <h2>Награды:</h2>
+                    </div>
 
-        </div>
+                </>
+            )
+            }
+
+        </div >
     )
 }
 
