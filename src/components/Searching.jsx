@@ -34,8 +34,8 @@ const Searching = (props) => {
                 }),
             );
             setFilms([...data]);
-            console.log(typeof films);
-            console.log(typeof data);
+            // console.log(typeof films);
+            // console.log(typeof data);
         } catch (error) {
             setError(error.message);
         }
@@ -56,8 +56,8 @@ const Searching = (props) => {
                         setValue(event.target.value)
                     }}
                     className='searchInput'
-                    type="text"
-                    placeholder="Поиск по фильмам"
+                    type='text'
+                    placeholder='Поиск по фильмам'
                     value={value} />
             </form>
 

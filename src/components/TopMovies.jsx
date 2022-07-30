@@ -73,10 +73,10 @@ export const TopMovies = (props) => {
     return <div>Ошибка: {error.message}</div>;
   } else if (!loaded) {
     return <div className='preloader'>
-      <img src={spinner} width="150" height="150" />
+      <img alt='' src={spinner} width='150' height='150' />
     </div>;
   } else {
-    console.log(films);
+    //  console.log(films);
     return (
       <div className='description__wrapper'>
         <div className='topMovies'>
@@ -95,7 +95,8 @@ export const TopMovies = (props) => {
 
           ))}
         </div>
-        <div className='preloader unvisible' ref={ref}><img src={spinner} width="100" height="100" /></div>
+        <div className='preloader unvisible' ref={ref}>
+          <img alt='' src={spinner} width='100' height='100' /></div>
       </div>
     );
   }

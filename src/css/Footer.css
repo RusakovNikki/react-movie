@@ -1,6 +1,11 @@
-.footerContainer {
-  /* background: #1A191E; */
-  color: white;
-  padding-top: 15px;
-  font-size: 12px;
+.background-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    background-color: #1A191E;
+    z-index: 100;
+    color: white;
+    padding-top: 15px;
+    font-size: 12px;
 }

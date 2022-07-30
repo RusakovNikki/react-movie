@@ -5,7 +5,7 @@ import Searching from './Searching';
 
 const Header = (props) => {
   return (
-    <div className='headerContainer'>
+    <div className='background-header'>
       <div className='menuContainer'>
         <Link to='/'>Главная</Link>
       </div>

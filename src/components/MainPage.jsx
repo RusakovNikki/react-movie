@@ -7,7 +7,15 @@ const MainPage = (props) => {
   return (
     <div className='pageBody'>
       <Slider />
-      <TopMovies error={props.error} loaded={props.loaded} films={props.films} scrolled={props.scrolled} counter={props.counter} searching={props.searching} trailers={props.trailers} />
+      <TopMovies 
+      error={props.error} 
+      loaded={props.loaded} 
+      films={props.films} 
+      searching={props.searching} 
+      /* scrolled={props.scrolled} 
+      counter={props.counter} 
+      trailers={props.trailers}  */
+      />
     </div>
   );
 };

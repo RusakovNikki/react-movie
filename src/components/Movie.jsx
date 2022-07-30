@@ -16,10 +16,10 @@ export const Movie = (props) => {
   return (
     <div className='movie'>
       <img alt={props.name} src={props.foto} 
-        data-aos="fade-zoom-in"
-        data-aos-easing="ease-in-back"
-        data-aos-delay="100"
-        data-aos-offset="0"/>
+        data-aos='fade-zoom-in'
+        data-aos-easing='ease-in-back'
+        data-aos-delay='100'
+        data-aos-offset='0'/>
       <div className='movie__dark__hover'></div>
       <div className='movie__description'>
         <p>{props.name}</p>

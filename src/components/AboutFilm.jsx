@@ -1,12 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
-import { fetchTrailer } from "../functions/fetchTrailer";
-import { fetchFacts } from "../functions/fetchFacts";
-import Fact from "../components/Fact";
-import { fetchAwards } from "../functions/fetchAwards";
-import Award from "../components/Award";
-import s from "../css/AboutFilm.module.css"
+import { fetchTrailer } from '../functions/fetchTrailer';
+import { fetchFacts } from '../functions/fetchFacts';
+import Fact from './Fact';
+import { fetchAwards } from '../functions/fetchAwards';
+import Award from './Award';
+import s from '../css/AboutFilm.module.css'
 
+// const API_KEY = 'cc5bbf2a-79b9-4de6-a091-234be04f22a8';
+// const API_KEY = 'cc5bbf2a-79b9-4de6-a091-234be04f22a8';
+const API_KEY = '954630cb-a912-442d-93bd-453fafd8d36b';
+// const API_KEY= '8c8e1a50-6322-4135-8875-5d40a5420d86'; 
 const AboutFilm = (props) => {
     const { id } = useParams();
     let [about, setAbout] = useState(null);
@@ -25,10 +29,10 @@ const AboutFilm = (props) => {
             setTrailers(trailer);
             setFacts(facts);
             setAwards(awards);
-            console.log('Awards: ', awards);
+            // console.log('Awards: ', awards);
         }
         fetchAdditionalData();
-    }, []);
+    }/* , [] */);
 
     /******************************************************/
 
@@ -36,20 +40,20 @@ const AboutFilm = (props) => {
         fetch(URL, {
             method: 'GET',
             headers: {
-                'X-API-KEY': 'cc5bbf2a-79b9-4de6-a091-234be04f22a8', //6189fc94-f92f-49e4-add4-368fbca3c2e0  cc5bbf2a-79b9-4de6-a091-234be04f22a8 954630cb-a912-442d-93bd-453fafd8d36b 8c8e1a50-6322-4135-8875-5d40a5420d86
-                'Content-Type': 'application/json',
+                'X-API-KEY': API_KEY,
+                    'Content-Type': 'application/json',
             },
         })
             .then(resp => resp.json())
             .then(data => setAbout(data))
 
-    }, [])
+    }/* , [] */)
 
     return (
         <div className={s.wrapper}>
             {about && (
                 <>
-                    {console.log(about)}
+                    {/* {console.log(about)} */}
                     <div className={s.about__dataWrapper}>
                         <div className={s.nastya}>
                             {
@@ -69,12 +73,12 @@ const AboutFilm = (props) => {
                         <h2>Трейлер:</h2>
                         <iframe
                             className={s.trailer}
-                            width="700"
-                            height="460"
+                            width='700'
+                            height='460'
                             src={trailers}
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            title='YouTube video player'
+                            frameBorder='0'
+                            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                             allowFullScreen>
                         </iframe>
                     </div>
