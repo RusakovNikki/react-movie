@@ -9,9 +9,11 @@ import s from '../css/AboutFilm.module.css'
 
 // const API_KEY = 'cc5bbf2a-79b9-4de6-a091-234be04f22a8';
 // const API_KEY = 'cc5bbf2a-79b9-4de6-a091-234be04f22a8';
-const API_KEY = '954630cb-a912-442d-93bd-453fafd8d36b';
-// const API_KEY= '8c8e1a50-6322-4135-8875-5d40a5420d86'; 
+// const API_KEY = '954630cb-a912-442d-93bd-453fafd8d36b';
+const API_KEY = '8c8e1a50-6322-4135-8875-5d40a5420d86';
+
 const AboutFilm = (props) => {
+
     const { id } = useParams();
     let [about, setAbout] = useState(null);
     let URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`;
@@ -20,6 +22,7 @@ const AboutFilm = (props) => {
     let [trailers, setTrailers] = props.trailers;
     let [facts, setFacts] = props.facts;
     let [awards, setAwards] = props.awards;
+
 
     useEffect(() => {
         const fetchAdditionalData = async () => {
@@ -32,7 +35,7 @@ const AboutFilm = (props) => {
             // console.log('Awards: ', awards);
         }
         fetchAdditionalData();
-    }/* , [] */);
+    }, []);
 
     /******************************************************/
 
@@ -41,26 +44,32 @@ const AboutFilm = (props) => {
             method: 'GET',
             headers: {
                 'X-API-KEY': API_KEY,
-                    'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
         })
             .then(resp => resp.json())
             .then(data => setAbout(data))
 
-    }/* , [] */)
+    }, []);
 
+    /**************************** Настя **************************/
+
+    /** ищем фильм по id в массиве с фильмами, который получаем в TopMovies 
+       (не делаем никаких дополнительных обращений к серверу) */
+
+    const film = props.films[0].find(x => x.filmId == id);
+ 
     return (
         <div className={s.wrapper}>
             {about && (
                 <>
                     {/* {console.log(about)} */}
                     <div className={s.about__dataWrapper}>
-                        <div className={s.nastya}>
-                            {
-                                /* Настина часть 
-                                Сюда можно вставить изображение фильма, а все остальное добавить в класс 
-                                about__data */
-                            }
+                        <div className={s.about__film}>
+                            <p>{film.nameRu}</p>
+                            <img className={s.about__filmImg} alt={film.nameRu} src={film.posterUrl} />
+                            <p>Рейтинг: {film.rating}</p>
+                            <p>Описание: {film.extra.description}</p>
                         </div>
                         <div className={s.about__data}>
                             <p>Бюджет составляет {about.items[0].amount} {about.items[0].symbol}</p>

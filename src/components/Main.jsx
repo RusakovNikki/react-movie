@@ -5,7 +5,7 @@ import MainPage from './MainPage';
 import AboutFilm from './AboutFilm';
 
 const Main = ({ error, loaded, films, searching, trailers, facts, awards }) => {
-
+    // console.log(films)
     return (
         <div className='background-main'>
             <Routes>
@@ -17,6 +17,7 @@ const Main = ({ error, loaded, films, searching, trailers, facts, awards }) => {
                         searching={searching} />} />
                 <Route path='/film/:id' element={
                     <AboutFilm
+                        films={films}
                         trailers={trailers}
                         facts={facts}
                         awards={awards} />} />

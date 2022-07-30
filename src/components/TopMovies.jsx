@@ -81,7 +81,9 @@ export const TopMovies = (props) => {
       <div className='description__wrapper'>
         <div className='topMovies'>
           {films.map((film) => (
-            <Link key={film.filmId} to={`/film/${film.filmId}`}>
+            <Link
+              key={film.filmId}
+              to={`/film/${film.filmId}`}>
               <Movie
                 key={film.filmId}
                 id={film.filmId}
