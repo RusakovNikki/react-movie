@@ -1,22 +1,16 @@
 import React, { useState } from 'react'
 import '../css/Header.css';
 import { getTopFilms, getFilmData } from '../utils/api';
-
-const apiTimeout = (i) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        return resolve();
-      }, 200 * i);
-    });
-  };
+import apiTimeout from '../functions/apiTimeout'
 
 const Searching = (props) => {
-    const [error, setError] = props.error;
-    const [loaded, setLoaded] = props.loaded;
-    const [films, setFilms] = props.films;
+    const setError = props.error[1];
+    const setLoaded = props.loaded[1];
+    const setFilms = props.films[1];
     const [value, setValue] = useState('')
-    const [searching, setSearching] = props.searching;
+    const setSearching = props.searching[1];
 
+    /* Функция для отображения фильмов из поиска */
     const requestSearch = (e) => {
         let urlSearch = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=${value}`;
         setLoaded(false)
@@ -34,8 +28,6 @@ const Searching = (props) => {
                 }),
             );
             setFilms([...data]);
-            // console.log(typeof films);
-            // console.log(typeof data);
         } catch (error) {
             setError(error.message);
         }
@@ -46,9 +38,7 @@ const Searching = (props) => {
             <form
                 className='searchInputContainer'
                 onSubmit={event => {
-                    debugger
                     event.preventDefault()
-
                     requestSearch()
                 }}>
                 <input

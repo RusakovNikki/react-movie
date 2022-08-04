@@ -5,7 +5,6 @@ import MainPage from './MainPage';
 import AboutFilm from './AboutFilm';
 
 const Main = ({ error, loaded, films, searching, trailers, facts, awards }) => {
-    // console.log(films)
     return (
         <div className='background-main'>
             <Routes>
