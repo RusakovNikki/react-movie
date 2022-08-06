@@ -6,20 +6,22 @@ import Aos from 'aos';
 
 export const Movie = (props) => {
 
+  /* Добавляем анимацию появления элементов */
   useEffect(() => {
     Aos.init({ duration: 300 });
   }, []);
 
   const genresStr = props.genres.map((a) => Object.values(a)).join(', ');
-
+  
+  /* Цвет кружочка рейтинга */
   let ratingColor = props.rating < 5 ? '--red' : props.rating < 8 && props.rating >= 5 ? '--yellow' : '--green';
   return (
     <div className='movie'>
-      <img alt={props.name} src={props.foto} 
-        data-aos='fade-zoom-in'
+      <img alt={props.name} src={props.foto}
+        data-aos='fade-zoom-in' /* Анимация библиотеки Aos */
         data-aos-easing='ease-in-back'
         data-aos-delay='100'
-        data-aos-offset='0'/>
+        data-aos-offset='0' />
       <div className='movie__dark__hover'></div>
       <div className='movie__description'>
         <p>{props.name}</p>

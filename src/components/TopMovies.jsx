@@ -5,14 +5,7 @@ import 'aos/dist/aos.css';
 import spinner from '../images/spinner.svg'
 import { getTopFilms, getFilmData } from '../utils/api';
 import { Link } from 'react-router-dom';
-
-export const apiTimeout = (i) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      return resolve();
-    }, 100 * i);
-  });
-};
+import apiTimeout from '../functions/apiTimeout'
 
 
 export const TopMovies = (props) => {
@@ -22,16 +15,18 @@ export const TopMovies = (props) => {
   let [scrolled, setScrolled] = useState(false)
   let [counter, setCounter] = useState(1)
   const ref = useRef(null);
-  const [searching, setSearching] = props.searching;
-  let filmsState = [];
+  const searching = props.searching[0];
 
+  /* Автопагинация главной страницы. При прокрутке к концу страницы, появляются новые фильмы */
   const scrollHandler = useCallback(e => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 800) {
+    let checkPositionAfterBottom = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
+
+    if (checkPositionAfterBottom < 800) { /* Переменная проверяет, произведен ли скролл до конца страницы */
       if (!scrolled && counter <= 12) { // так как всего 250 фильмов, выводим по 20, значит 12 страниц
         setCounter(++counter);
-        setTimeout(() => ref.current.className = 'preloader', 1000);
+        setTimeout(() => ref.current.className = 'preloader', 1000); /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
         fetchFilms();
-        setTimeout(() => ref.current.className = 'preloader unvisible', 3000);
+        setTimeout(() => ref.current.className = 'preloader unvisible', 3000); /* Удаление прелоадера */
         setScrolled(scrolled = true)
         setTimeout(() => { setScrolled(scrolled = false) }, 4000);
       }
@@ -48,18 +43,19 @@ export const TopMovies = (props) => {
           return { ...film, extra };
         }),
       );
-      setFilms([...filmsState, ...data]);
-      filmsState = [...filmsState, ...data]
+      setFilms(films => { return [...films, ...data] });
     } catch (error) {
       setError(error.message);
     }
     setLoaded(true);
   }
 
+  /* Для поиска. Убирает автопагинацию при поиске фильмов */
   useEffect(() => {
     document.removeEventListener('scroll', scrollHandler)
   }, [searching]);
 
+  /* Обработчик собития на скролл для работы автопагинации */
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
     return () => document.removeEventListener('scroll', scrollHandler)
