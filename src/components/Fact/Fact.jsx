@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import s from '../styles/Fact.module.css';
-import { getFacts } from '../functions/getFacts';
+import s from './Fact.module.css';
+import { getFacts } from './getFacts';
 
 export const Fact = ({ id/* , facts */ }) => {
 
@@ -9,8 +9,8 @@ export const Fact = ({ id/* , facts */ }) => {
 
 
     useEffect(() => {
-       /*  const facts = getFacts(id);
-        setFacts(facts); */
+        /*  const facts = getFacts(id);
+         setFacts(facts); */
         const fetchAdditionalData = async () => {
             const facts = await getFacts(id);
             setFacts(facts);

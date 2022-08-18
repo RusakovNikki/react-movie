@@ -1,21 +1,21 @@
 
-import React, { useState } from 'react';
-import './../Movie.css';
+import React from 'react';
+import './Movie.css';
 
 export const Movie = ({ id, name, foto, rating, genresStr, extra, onClick }) => {
 
     const movieInfo = {
-        id: id, 
-        name: name, 
-        foto: foto, 
-        rating: rating, 
+        id: id,
+        name: name,
+        foto: foto,
+        rating: rating,
         genresStr: genresStr
     }
 
-    const handleClick = () => { 
+    const handleClick = () => {
         onClick(movieInfo) /* поднимаем наверх объект с инфой, чтобы передать фото, имя и тд в AboutFilm  */
     }
-    
+
     return (
         <div className='movie' onClick={handleClick}>
             <img alt={name} src={foto} />

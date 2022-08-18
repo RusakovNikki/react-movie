@@ -1,17 +1,16 @@
-import s from '../styles/Awards.module.css';
+import s from './Awards.module.css';
 import React, { useState, useEffect } from 'react';
-import { getAwards } from '../functions/getAwards';
+import { getAwards } from './getAwards';
 
 export const Awards = ({ id/*,  awards */ }) => {
     let [awards, setAwards] = useState(null);
 
     /* Нам точно нужна такая конструкция с fetchAdditionalData? (Настя) */
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchAdditionalData = async () => {
             const awards = await getAwards(id);
             if (awards) setAwards(awards);
-          
         }
         fetchAdditionalData();
     }, [id]);
@@ -19,9 +18,9 @@ export const Awards = ({ id/*,  awards */ }) => {
     console.log('awards', awards);
 
     return (
-        <div> 
+        <div>
             Awards
-            { awards && awards.map((award) => { /* Поставила проверку, что awards != null, потому что иногда почему-то null с сервера возвращается (Настя) */
+            {awards && awards.map((award) => { /* Поставила проверку, что awards != null, потому что иногда почему-то null с сервера возвращается (Настя) */
 
                 return <p>{award.name}</p>
 

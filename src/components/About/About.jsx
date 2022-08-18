@@ -1,5 +1,5 @@
-import { fetchAbout } from '../utils/requests';
 import React, { useState, useEffect } from 'react';
+import { fetchAbout } from '../../utils/requests';
 
 export const About = ({ id/* ,about */ }) => {
 

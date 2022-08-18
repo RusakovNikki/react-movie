@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { urlHeaders } from '../../../../constants';
-import { Movie } from './Movie';
-import './../Movies.css';
+import { urlHeaders } from '../../constants';
+import { Movie } from '../Movie/Movie';
+import './Movies.css';
 
 export const Movies = ({ url, onClick }) => {
 

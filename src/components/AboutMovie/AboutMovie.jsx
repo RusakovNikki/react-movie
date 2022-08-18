@@ -1,13 +1,13 @@
-import { getTrailer } from './functions/getTrailer';
+/* import { getTrailer } from './functions/getTrailer';
 import { getFacts } from './functions/getFacts';
 import { getAwards } from './functions/getAwards';
-import { fetchAbout } from './utils/requests';
+import { fetchAbout } from './utils/requests'; */
 
 import React, { useState, useEffect } from 'react';
-import { Trailer } from './components/Trailer';
-import { Awards } from './components/Awards';
-import { About } from './components/About';
-import { Fact } from './components/Fact';
+import { Trailer } from '../Trailer/Trailer';
+import { Awards } from '../Awards/Awards';
+import { About } from '../About/About';
+import { Fact } from '../Fact/Fact';
 
 export const AboutMovie = ({ movie }) => {
 
@@ -37,11 +37,11 @@ export const AboutMovie = ({ movie }) => {
              // const trailer = await getTrailer(id);
              // const facts = await getFacts(id);
              // const awards = await getAwards(id);
-             //   const about = await fetchAbout(id);
+             // const about = await fetchAbout(id);
              // setTrailer(trailer);
              // setFacts(facts);
              // setAwards(awards);
-             //  setAbout(about);
+             // setAbout(about);
          }
  
          if (id) fetchAdditionalData();
