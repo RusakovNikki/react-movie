@@ -5,7 +5,7 @@ export const Searching = (props) => {
 
     const [search, setSearch] = useState('');
     const searchURL = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`;
-
+    const setStatusSearching = props.useSearch[1] // хук, используемый для пагинации
 
     const handleChange = (event) => {
         const input = event.target.value;
@@ -25,6 +25,7 @@ export const Searching = (props) => {
         console.log(search)  */
         props.onSearch(url)
 
+        setStatusSearching(true)
     }
 
     return <form onSubmit={handleSubmit}>
