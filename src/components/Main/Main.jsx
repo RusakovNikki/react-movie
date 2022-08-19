@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Movies } from "../Movies/Movies";
 import { AboutMovie } from "../AboutMovie/AboutMovie";
 
-export const Main = ({ url, showElements, useSearch }) => {
+export const Main = ({ url, showElements }) => {
 
     const [currMovie, setCurrMovie] = useState({}); // фильм, на который кликнули
 
@@ -15,7 +15,7 @@ export const Main = ({ url, showElements, useSearch }) => {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={
-                    <Movies url={url} onClick={handleClick} showElements={showElements} useSearch={useSearch}/>
+                    <Movies url={url} onClick={handleClick} showElements={showElements} />
                 }>
                 </Route>
                 <Route path='/film/:id' element={

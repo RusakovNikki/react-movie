@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { isSearchingAction } from '../../store/reducers/isSearchReducer';
 
 
 export const Searching = (props) => {
 
     const [search, setSearch] = useState('');
     const searchURL = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`;
-    const setStatusSearching = props.useSearch[1] // хук, используемый для пагинации
+
+    /* Пробую использовать Redux */
+    /* Никита */
+    const dispatch = useDispatch()
+    // const isSearch = useSelector(state => state.search)
+
+    const isSearching = () => { /* Функция, отвечающая за состояние в Redux */
+        dispatch(isSearchingAction())
+    }
+    // console.log(isSearch);
+    /*  */
 
     const handleChange = (event) => {
         const input = event.target.value;
@@ -25,7 +37,7 @@ export const Searching = (props) => {
         console.log(search)  */
         props.onSearch(url)
 
-        setStatusSearching(true)
+        isSearching() // Вызов диспача в Redux
     }
 
     return <form onSubmit={handleSubmit}>

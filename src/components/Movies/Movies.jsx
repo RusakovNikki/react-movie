@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { urlHeaders } from '../../constants';
+import {  useSelector } from 'react-redux';
 import { Movie } from '../Movie/Movie';
 import './Movies.css';
 
-export const Movies = ({ url, onClick, showElements, useSearch }) => {
+export const Movies = ({ url, onClick, showElements }) => {
 
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [movies, setMovies] = useState([]);
     let [countPagesOfPagination, setPages] = useState(2) /* Используется для счётчика страниц пагинации */
     let [scrolled, setScrolled] = useState(false) /* Нужно для автопагинации при скролле */
+    const isSearch = useSelector(state => state.isSearchReducer.search) // наше состояние в state
 
     const handleClick = (movie) => {
         onClick(movie) /* поднимаем наверх объект с инфой, чтобы передать фото, имя и тд в AboutFilm */ /* не знаю, насколько это правильно (Настя) */
@@ -29,12 +30,12 @@ export const Movies = ({ url, onClick, showElements, useSearch }) => {
             setTimeout(() => { setScrolled(scrolled = false) }, 2000);
         }
     }, [])
-    console.log(useSearch[0]);
+    console.log(isSearch)
 
     /* Для поиска. Убирает автопагинацию при поиске фильмов */
     useEffect(() => {
         document.removeEventListener('scroll', scrollHandler)
-    }, [useSearch[0]]);
+    }, [isSearch]);
 
     /* Обработчик собития на скролл для работы автопагинации */
     useEffect(() => {
@@ -57,7 +58,7 @@ export const Movies = ({ url, onClick, showElements, useSearch }) => {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setMovies(films => useSearch[0] ? result.films : [...films, ...result.films]);
+                    setMovies(films => isSearch ? result.films : [...films, ...result.films]);
                 },
                 (error) => {
                     setIsLoaded(true);
