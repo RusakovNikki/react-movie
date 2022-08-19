@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/MainPage.css';
-import Slider from '../components/Slider.jsx';
+import { Slider } from '../components/Slider.jsx';
 import { TopMovies } from '../components/TopMovies';
 
 const MainPage = (props) => {
