@@ -1,6 +1,20 @@
 /*************  НЕ ИСПОЛЬЗУЕТСЯ ПОКА ЧТО ****************/
 import { API_URL, urlHeaders } from "../constants";
 
+/*Дополнительная информация на hover*/
+
+export const getFilmData = async (id) => {
+    try {
+        const result = await fetch(`${API_URL}/films/${id}`, {
+            method: 'GET',
+            headers: urlHeaders,
+        });
+        return result.json();
+    } catch (error) {
+        return {};
+    }
+};
+
 /*Пункты 2.6-2.8 ТЗ Юля*/
 
 export const fetchTrailer = async (id) => {
@@ -70,17 +84,4 @@ export const getTopFilms = async(page = 1) => {
     return result.json();
 };
 
-export const getFilmData = async(id) => {
-    try {
-        const result = await fetch(`${API_URL}/films/${id}`, {
-            method: 'GET',
-            headers: {
-                'X-API-KEY': API_KEY,
-                'Content-Type': 'application/json',
-            },
-        });
-        return result.json();
-    } catch (error) {
-        return {};
-    }
-}; */
+ */

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { urlHeaders } from '../../constants';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Movie } from '../Movie/Movie';
 import './Movies.css';
 
@@ -85,7 +85,6 @@ export const Movies = ({ url, onClick, showElements }) => {
                         foto={movie.posterUrl}
                         rating={movie.rating}
                         genresStr={movie.genres}
-                        extra='extra'
                     />
                 </Link>
             }
