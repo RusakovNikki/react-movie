@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { urlHeaders } from '../../constants';
-import { useSelector } from 'react-redux';
+import spinner from '../../images/spinner.svg'
 import { Movie } from '../Movie/Movie';
 import './Movies.css';
 
 export const Movies = ({ url, onClick, showElements }) => {
-
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [movies, setMovies] = useState([]);
+    const ref = useRef(null) /* Ссылка на preloader */
     let [countPagesOfPagination, setPages] = useState(2) /* Используется для счётчика страниц пагинации */
     let [scrolled, setScrolled] = useState(false) /* Нужно для автопагинации при скролле */
-    const isSearch = useSelector(state => state.isSearchReducer.search) // наше состояние в state
 
     const handleClick = (movie) => {
         onClick(movie) /* поднимаем наверх объект с инфой, чтобы передать фото, имя и тд в AboutFilm */ /* не знаю, насколько это правильно (Настя) */
@@ -23,19 +23,17 @@ export const Movies = ({ url, onClick, showElements }) => {
     const scrollHandler = useCallback(e => {
         let checkPositionAfterBottom = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
 
-        if (checkPositionAfterBottom < 400 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
+        if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             showElements(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
             setPages(countPagesOfPagination++)
-            setScrolled(scrolled = true)
-            setTimeout(() => { setScrolled(scrolled = false) }, 2000);
+            setScrolled(true)
+
+            ref.current.className = 'preloader' /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
+            setTimeout(() => { setScrolled(false) }, 2000);
+            setTimeout(() => ref.current.className = 'preloader--unvisible', 3000) /* Удаление прелоадера */
         }
     }, [])
-    console.log(isSearch)
-
-    /* Для поиска. Убирает автопагинацию при поиске фильмов */
-    useEffect(() => {
-        document.removeEventListener('scroll', scrollHandler)
-    }, [isSearch]);
+    console.log(movies.length)
 
     /* Обработчик собития на скролл для работы автопагинации */
     useEffect(() => {
@@ -58,7 +56,13 @@ export const Movies = ({ url, onClick, showElements }) => {
             .then(
                 (result) => {
                     setIsLoaded(true);
-                    setMovies(films => isSearch ? result.films : [...films, ...result.films]);
+                    setMovies(films => {
+                        if (result.films.length < 20) {
+                            document.removeEventListener('scroll', scrollHandler)
+                            return result.films
+                        }
+                        else return [...films, ...result.films]
+                    });
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -68,28 +72,36 @@ export const Movies = ({ url, onClick, showElements }) => {
     }, [url]);
 
     if (error) {
-        return <div>Ошибка: {error.message}</div>;
+        return <div>Ошибка: {error.message}</div>
     } else if (!isLoaded) {
-        return <div>Загрузка...</div>;
-    } else {
-        return <div className='Movies'>
-            {movies.map((movie) => {
-
-                return <Link key={movie.filmId}
-                    to={`/film/${movie.filmId}`}>
-                    <Movie
-                        key={movie.filmId}
-                        id={movie.filmId}
-                        onClick={handleClick}
-                        name={movie.nameRu}
-                        foto={movie.posterUrl}
-                        rating={movie.rating}
-                        genresStr={movie.genres}
-                    />
-                </Link>
-            }
-            )}
+        return <div className='preloader'>
+            <img alt='Загрузка...' src={spinner} width='150' height='150' />
         </div>
+    } else {
+        return <>
+            <div className='main__body main__body--margin'>
+                {movies.map((movie) => {
+
+                    return <Link key={movie.filmId}
+                        to={`/film/${movie.filmId}`}>
+                        <Movie
+                            key={movie.filmId}
+                            id={movie.filmId}
+                            onClick={handleClick}
+                            name={movie.nameRu}
+                            foto={movie.posterUrl}
+                            rating={movie.rating}
+                            genresStr={movie.genres}
+                        />
+                    </Link>
+                }
+                )}
+            </div>
+
+            <div className='preloader preloader--unvisible' ref={ref}>
+                <img alt='' src={spinner} width='100' height='100' />
+            </div>
+        </>
     }
 
 }
