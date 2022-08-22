@@ -8,6 +8,7 @@ import { Trailer } from '../Trailer/Trailer';
 import { Awards } from '../Awards/Awards';
 import { About } from '../About/About';
 import { Fact } from '../Fact/Fact';
+import s from './AboutMovie.module.css';
 
 export const AboutMovie = ({ movie }) => {
 
@@ -16,8 +17,6 @@ export const AboutMovie = ({ movie }) => {
     const foto = movie.foto
     const rating = movie.rating
     const genresStr = movie.genresStr
-
-
     /* Получить дополнительную информацию по фильму */
 
     // мб разбросать стейты по компонентам и не держать их тут? *Настя*
@@ -49,15 +48,20 @@ export const AboutMovie = ({ movie }) => {
 
 
     return (
-        <div className='AboutMovie'>
-            <div>
-                <div>{name}</div>
-                <div>{foto}</div>
-                <div>{rating} </div>
+        <div className={s.aboutMovie__wrapper}>
+            <div className={s.aboutMovie__info}>
+                <div className={s.aboutMovie__imgWrapper}>
+                    <img className={s.aboutMovie__img} src={foto} />
+                </div>
+                <div className={s.aboutMovie__textData}>
+                    <div className={s.aboutMovie__name}>{name}</div>
+                    <div className={s.aboutMovie__rate}>{rating} </div>
+                    <About id={id} />
+                </div>
             </div>
-            <Trailer id={id} /* trailer={trailer} */ />
+            <Trailer id={id} />
             <Awards id={id} /* awards={awards} */ />
-            <About id={id}  /* about={about} */ />
+
             <Fact id={id} /* facts={facts} */ />
         </div>
     );

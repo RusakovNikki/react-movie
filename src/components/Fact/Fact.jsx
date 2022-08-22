@@ -7,16 +7,16 @@ export const Fact = ({ id/* , facts */ }) => {
 
     let [facts, setFacts] = useState(null);
 
-
-    useEffect(() => {
-        /*  const facts = getFacts(id);
-         setFacts(facts); */
-        const fetchAdditionalData = async () => {
-            const facts = await getFacts(id);
-            setFacts(facts);
-        }
-        fetchAdditionalData();
-    }, [id]);
+    /* 
+        useEffect(() => {
+            /*  const facts = getFacts(id);
+             setFacts(facts); 
+    const fetchAdditionalData = async () => {
+        const facts = await getFacts(id);
+        setFacts(facts);
+    }
+    fetchAdditionalData();
+}, [id]); */
 
     console.log("facts", facts);
 

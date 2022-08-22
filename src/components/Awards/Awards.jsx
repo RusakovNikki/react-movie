@@ -7,13 +7,13 @@ export const Awards = ({ id/*,  awards */ }) => {
 
     /* Нам точно нужна такая конструкция с fetchAdditionalData? (Настя) */
 
-    useEffect(() => {
+    /* useEffect(() => {
         const fetchAdditionalData = async () => {
             const awards = await getAwards(id);
             if (awards) setAwards(awards);
         }
         fetchAdditionalData();
-    }, [id]);
+    }, [id]); */
 
     console.log('awards', awards);
 

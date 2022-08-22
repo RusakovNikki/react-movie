@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { getFilmData } from '../../utils/requests';
 import { MovieDesc } from '../MovieDesc/MovieDesc';
 import './Movie.css';
-
 import 'aos/dist/aos.css';
 import Aos from 'aos';
 

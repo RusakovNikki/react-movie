@@ -1,0 +1,37 @@
+.aboutMovie__wrapper {
+    max-width: 1200px;
+    margin: 75px auto 0;
+}
+
+.aboutMovie__info {
+    display: flex;
+    margin-bottom: 75px;
+    align-items: center;
+}
+
+.aboutMovie__imgWrapper {
+    width: 40%;
+    max-width: fit-content;
+    margin-right: 50px;
+}
+
+.aboutMovie__img {
+    max-height: 450px;
+    border-radius: 7px;
+    box-shadow: 0 0 5px #000;
+}
+
+.aboutMovie__textData {
+    color: #fff;
+    font-weight: 700;
+}
+
+.aboutMovie__name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.aboutMovie__rate {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
