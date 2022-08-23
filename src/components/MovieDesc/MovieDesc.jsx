@@ -4,7 +4,7 @@ import s from './MovieDesc.module.css';
 
 
 
-export const MovieDesc = forwardRef(({ movieData }) => {
+export const MovieDesc = ({ movieData }) => {
 
     if (movieData !== null) {
         return (
@@ -17,4 +17,4 @@ export const MovieDesc = forwardRef(({ movieData }) => {
             </div>
         );
     }
-})
+}

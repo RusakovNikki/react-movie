@@ -7,7 +7,7 @@ import './Movie.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
 
-export const Movie = ({ id, name, foto, rating, genresStr, onClick }) => {
+export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc }) => {
     let [movieData, setMovieData] = useState(null);
     let [error, setError] = useState(null);
     let [loaded, setLoaded] = useState(false);
@@ -29,6 +29,7 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick }) => {
         onClick(movieInfo) /* поднимаем наверх объект с инфой, чтобы передать фото, имя и тд в AboutFilm  */
     }
 
+    /*Получение данных для hover*/
     const fetchAdditionalData = async (id) => {
         try {
             const result = await getFilmData(id);
@@ -41,6 +42,7 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick }) => {
         console.log('MovieData: ', movieData);
     }
 
+    getMovieDesc(movieData); //Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
 
     genresStr = genresStr.map((a) => Object.values(a)).join(', ')
 

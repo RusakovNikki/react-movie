@@ -6,7 +6,7 @@ import spinner from '../../images/spinner.svg'
 import { Movie } from '../Movie/Movie';
 import './Movies.css';
 
-export const Movies = ({ url, onClick, showElements }) => {
+export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [movies, setMovies] = useState([]);
@@ -92,6 +92,7 @@ export const Movies = ({ url, onClick, showElements }) => {
                             foto={movie.posterUrl}
                             rating={movie.rating}
                             genresStr={movie.genres}
+                            getMovieDesc={getMovieDesc}
                         />
                     </Link>
                 }
