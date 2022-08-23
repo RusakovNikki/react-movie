@@ -24,9 +24,11 @@ export const AboutMovie = ({ movie, movieDesc }) => {
                     <About id={id} movieDesc={movieDesc} />
                 </div>
             </div>
-            <Trailer id={id} />
-            <Awards id={id} />
-            <Fact id={id} />
+            <div className={s.aboutMovie__additionalData}>
+                <Trailer id={id} />
+                <Awards id={id} />
+                <Fact id={id} />
+            </div>
         </div>
     );
 }

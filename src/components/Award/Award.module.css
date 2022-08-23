@@ -1,0 +1,29 @@
+.award__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.award__img {
+    max-width: 50px;
+}
+
+.award__imgWrapper {
+    margin-right: 50px;
+}
+
+.award__name {
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.award__nominationName {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.award__desc {
+    width: 50%;
+}
