@@ -16,7 +16,7 @@ export const App = () => {
   return (
     <>
       <header className="header">
-        {/* <Link to='/'>Главная</Link>  */}
+        {/* <Link to='/'>Главная</Link>  */}  {/* Сделайте, пж, что этим занимается, переход на главную по клику на лого (Юля) */}
         <div className='header__body'>
           <div className="header__logo">
             <img src={logo} alt="logo" className='header__logo-item logo-item' />

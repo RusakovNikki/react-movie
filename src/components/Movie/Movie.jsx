@@ -27,9 +27,11 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
 
     const handleClick = () => {
         onClick(movieInfo) /* поднимаем наверх объект с инфой, чтобы передать фото, имя и тд в AboutFilm  */
+
+        //Насть, из-за передачи по клику походу и пошла проблема в AboutFilm, наверное, лучше создать функцию и записать в стейт (по аналогии с getMovieDesc строка 47 здесь).
     }
 
-    /*Получение данных для hover*/
+    /* Получение данных для hover */
     const fetchAdditionalData = async (id) => {
         try {
             const result = await getFilmData(id);
@@ -43,9 +45,8 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
     }
 
     useEffect(() => {
-        getMovieDesc(movieData); //Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
+        getMovieDesc(movieData); // Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
     })
-
 
     genresStr = genresStr.map((a) => Object.values(a)).join(', ')
 

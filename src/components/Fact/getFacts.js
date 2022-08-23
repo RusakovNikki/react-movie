@@ -10,5 +10,4 @@ export const getFacts = async (id) => {
     return facts.items.slice(0, 5).map(item => {
         return `${counter++}. ` + cutOutTags(item.text);
     });
-
 }

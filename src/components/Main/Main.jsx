@@ -11,6 +11,8 @@ export const Main = ({ url, showElements }) => {
         setCurrMovie(movie);
     }
 
+    //Функция нужна для записи в стейт описания фильма, которое получаем из апи в другой компоненте, чтобы несколько раз не делать вызов (Юля)
+
     const getMovieDesc = (value) => {
         if (value && value !== null)
             setMovieDesc(value.description);

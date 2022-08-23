@@ -30,7 +30,7 @@ export const Fact = ({ id }) => {
                     </p>
                 ))
                 }
-            </div >
+            </div>
         );
     }
 }

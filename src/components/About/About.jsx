@@ -34,7 +34,7 @@ export const About = ({ id, movieDesc }) => {
             )
         } else {
             let marketingBudget;
-            let dollarSymbol = about.items[0].symbol;
+            let currencySymbol = about.items[0].symbol;
             let budget = about.items[0].amount; //Написать алгоритм для разделения разрядов чисел 1 000 000
             if (about.length > 1) {
                 marketingBudget = about.items[1].amount;
@@ -44,9 +44,9 @@ export const About = ({ id, movieDesc }) => {
 
             return (
                 <div className={s.about__data}>
-                    <p>Бюджет составляет: {budget}{dollarSymbol}</p>
-                    <p>Бюджет, потраченный на маркетинговые кампании: {marketingBudget}{dollarSymbol} </p>
-                    <p>Сборы по всему миру составляют: {worldwideGain}{dollarSymbol}</p>
+                    <p>Бюджет составляет: {budget} {currencySymbol}</p>
+                    <p>Бюджет, потраченный на маркетинговые кампании: {marketingBudget} {currencySymbol} </p>
+                    <p>Сборы по всему миру составляют: {worldwideGain} {currencySymbol}</p>
                     <p className={s.about__desc}>{movieDesc}</p>
                 </div>
             );

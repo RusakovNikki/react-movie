@@ -10,7 +10,7 @@ export const AboutMovie = ({ movie, movieDesc }) => {
     const name = movie.name
     const foto = movie.foto
     const rating = movie.rating
-    const genresStr = movie.genresStr;  //Нужна эта переменная?
+    const genresStr = movie.genresStr;  //Нужна эта переменная? (Юля)
 
     return (
         <div className={s.aboutMovie__wrapper}>

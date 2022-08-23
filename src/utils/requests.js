@@ -53,7 +53,6 @@ export const fetchAwards = async (id) => {
     }
 };
 
-
 /**Настя */
 export const fetchAbout = async (id) => {
     const URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`;
@@ -68,8 +67,8 @@ export const fetchAbout = async (id) => {
     }
 };
 
-/* получить список фильмов по ключевым словам */
-/* 
+/* получить список фильмов по ключевым словам
+Эта функция нужна вообще? (Юля)
 import { API_KEY, API_URL } from '../constants';
 
 export const getTopFilms = async(page = 1) => {
@@ -82,6 +81,4 @@ export const getTopFilms = async(page = 1) => {
         },
     });
     return result.json();
-};
-
- */
+}; */

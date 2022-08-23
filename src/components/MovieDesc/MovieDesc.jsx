@@ -1,11 +1,7 @@
-import { forwardRef } from 'react';
 import { getShortDesc } from './functions/getShortDesc';
 import s from './MovieDesc.module.css';
 
-
-
 export const MovieDesc = ({ movieData }) => {
-
     if (movieData !== null) {
         return (
             <div className={s.description}>
