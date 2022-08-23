@@ -42,7 +42,10 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
         console.log('MovieData: ', movieData);
     }
 
-    getMovieDesc(movieData); //Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
+    useEffect(() => {
+        getMovieDesc(movieData); //Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
+    })
+
 
     genresStr = genresStr.map((a) => Object.values(a)).join(', ')
 

@@ -1,31 +1,38 @@
 
 import React, { useState, useEffect } from 'react';
+import { getRandomId } from '../../functions/getRandomId';
 import s from './Fact.module.css';
 import { getFacts } from './getFacts';
 
-export const Fact = ({ id/* , facts */ }) => {
-
+export const Fact = ({ id }) => {
     let [facts, setFacts] = useState(null);
 
-    /* 
-        useEffect(() => {
-            /*  const facts = getFacts(id);
-             setFacts(facts); 
-    const fetchAdditionalData = async () => {
-        const facts = await getFacts(id);
-        setFacts(facts);
+    useEffect(() => {
+        const fetchAdditionalData = async () => {
+            const facts = await getFacts(id);
+            if (facts) setFacts(facts);
+        }
+        fetchAdditionalData();
+    }, [id]);
+
+    if (facts) {
+        return (
+            <div className={s.fact__wrapper}>
+                <div className={s.fact__header}>
+                    Факты о фильме
+                </div>
+                {facts.map(fact => (
+                    <p
+                        key={getRandomId(1, 2000)}
+                        className={s.fact__item}
+                    >
+                        {fact}
+                    </p>
+                ))
+                }
+            </div >
+        );
     }
-    fetchAdditionalData();
-}, [id]); */
-
-    console.log("facts", facts);
-
-    return (
-        <div>Fact</div>
-        /*     <div className={s.fact__wrapper}>
-                <p className={s.fact__item}>{facts}</p>
-            </div> */
-    );
 }
 
 
