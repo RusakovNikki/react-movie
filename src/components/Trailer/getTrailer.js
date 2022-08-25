@@ -4,7 +4,7 @@ import { fetchTrailer } from '../../utils/requests';
 Позже заметила, что не у всех фильмов есть трейлер с YouTube, потом доработаю функцию. */
 /* Юля */
 
-export const getTrailer = async (id) => {
+export const getTrailer = async(id) => {
     const trailers = await fetchTrailer(id);
     const trailer = trailers.items.find(item => {
         return item.site === 'YOUTUBE';

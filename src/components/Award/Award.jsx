@@ -5,7 +5,7 @@ export const Award = ({ award }) => {
 
     award.imageUrl === null ? imgSrc = 'https://pngimg.com/uploads/award/award_PNG44.png' : imgSrc = award.imageUrl;    //если апи возвращает пустое изображение награды, вставляется дефолтная картинка
 
-    console.log('src ', imgSrc);
+    // console.log('src ', imgSrc);
     return (
         <div className={s.award__wrapper}>
             <div className={s.award__imgWrapper}>

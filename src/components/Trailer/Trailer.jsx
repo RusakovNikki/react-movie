@@ -14,10 +14,8 @@ export const Trailer = () => {
         }
         fetchAdditionalData(id);
     }, [id]);
-
-    console.log(id);
-    console.log('Trailer: ', trailer);
-    return (
+ 
+    return (trailer && // поставила такую проверку, чтобы пустое окошко без трейлера не выводилось
         <div className={s.trailer__wrapper}>
             <div className={s.trailer__header}>
                 Трейлер
