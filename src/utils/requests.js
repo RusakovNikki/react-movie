@@ -3,6 +3,7 @@ import { API_URL, urlHeaders } from "../constants";
 /*Дополнительная информация на hover*/
 /* мы каждый раз будем при наведении делать запрос?😿 (Настя) */
 export const getFilmData = async(id) => {
+    console.log('getFilmData: запрос к серверу', id);
     try {
         const result = await fetch(`${API_URL}/films/${id}`, {
             method: 'GET',

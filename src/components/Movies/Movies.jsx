@@ -35,7 +35,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
     }, [])
     // console.log(movies.length)
 
-    /* Обработчик собития на скролл для работы автопагинации */
+    /* Обработчик события на скролл для работы автопагинации */
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler); //componentDidMount && componentDidUpdate
         return () => document.removeEventListener('scroll', scrollHandler) // componentWillUnmount 

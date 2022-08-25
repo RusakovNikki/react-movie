@@ -10,3 +10,6 @@ export const urlHeaders = {
     'X-API-KEY': API_KEY,
     'Content-Type': 'application/json',
 };
+
+
+export const TOP20_URL = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS';

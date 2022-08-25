@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Searching.css'
 
-export const Searching = (props) => {
+export const Searching = ({ onSearch }) => {
     const [search, setSearch] = useState('');
     const searchURL = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`;
 
@@ -16,7 +16,7 @@ export const Searching = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault(); /* чтобы страничка не перезагружалась */
         const url = `${searchURL}?keyword=${search}`;
-        props.onSearch(url)
+        onSearch(url)
     }
 
     return (

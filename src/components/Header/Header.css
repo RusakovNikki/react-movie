@@ -1,0 +1,22 @@
+.header {
+    background: rgb(27, 25, 31);
+}
+
+.header__link {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.header__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3vw;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.logo-item {
+    height: 10vh;
+}

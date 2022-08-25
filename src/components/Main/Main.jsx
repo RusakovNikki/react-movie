@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import React, { useState } from 'react';
 import { Movies } from "../Movies/Movies";
 import { AboutMovie } from "../AboutMovie/AboutMovie";
@@ -19,19 +19,18 @@ export const Main = ({ url, showElements }) => {
     }
 
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={
-                    <Movies url={url} onClick={handleClick} showElements={showElements} getMovieDesc={getMovieDesc} />
-                }>
-                </Route>
-                <Route path='/film/:id' element={
-                    <AboutMovie movie={currMovie} movieDesc={movieDesc} />
-                }>
-                </Route>
-            </Routes>
-        </BrowserRouter>
-
+    <main className="main">
+        <Routes>
+            <Route path='/' element={
+                <Movies url={url} onClick={handleClick} showElements={showElements} getMovieDesc={getMovieDesc} />
+            }>
+            </Route>
+            <Route path='/film/:id' element={
+                <AboutMovie movie={currMovie} movieDesc={movieDesc} />
+            }>
+            </Route>
+        </Routes>
+    </main>
     );
 }
 
