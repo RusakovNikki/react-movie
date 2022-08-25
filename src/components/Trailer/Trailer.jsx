@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getTrailer } from './getTrailer';
 import s from './Trailer.module.css';
 
-export const Trailer = ({ id }) => {
+export const Trailer = () => {
     let [trailer, setTrailer] = useState(null);
+    const { id } = useParams()
 
     useEffect(() => {
         const fetchAdditionalData = async (id) => {

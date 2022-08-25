@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { getAwards } from './getAwards';
 import { Award } from '../Award/Award';
 import { getRandomId } from '../../functions/getRandomId';
+import { useParams } from 'react-router-dom';
 
-export const Awards = ({ id }) => {
+export const Awards = () => {
     let [awards, setAwards] = useState(null);
-
+    const { id } = useParams()
     /* Нам точно нужна такая конструкция с fetchAdditionalData? (Настя). Вроде бы да, так как иначе возвращается промис (Юля)*/
 
     useEffect(() => {

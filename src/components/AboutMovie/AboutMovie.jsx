@@ -11,7 +11,7 @@ export const AboutMovie = ({ movie, movieDesc }) => {
     const foto = movie.foto
     const rating = movie.rating
     const genresStr = movie.genresStr;  //Нужна эта переменная? (Юля)
-
+    console.log('qqq');
     return (
         <div className={s.aboutMovie__wrapper}>
             <div className={s.aboutMovie__info}>
@@ -21,13 +21,13 @@ export const AboutMovie = ({ movie, movieDesc }) => {
                 <div className={s.aboutMovie__textData}>
                     <div className={s.aboutMovie__name}>{name}</div>
                     <div className={s.aboutMovie__rate}>{rating} </div>
-                    <About id={id} movieDesc={movieDesc} />
+                    <About  movieDesc={movieDesc} />
                 </div>
             </div>
             <div className={s.aboutMovie__additionalData}>
-                <Trailer id={id} />
-                <Awards id={id} />
-                <Fact id={id} />
+                <Trailer />
+                <Awards />
+                <Fact />
             </div>
         </div>
     );

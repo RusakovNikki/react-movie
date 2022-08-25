@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { getRandomId } from '../../functions/getRandomId';
 import s from './Fact.module.css';
 import { getFacts } from './getFacts';
 
-export const Fact = ({ id }) => {
+export const Fact = () => {
     let [facts, setFacts] = useState(null);
+    const { id } = useParams()
 
     useEffect(() => {
         const fetchAdditionalData = async () => {

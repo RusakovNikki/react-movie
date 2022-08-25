@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { fetchAbout } from '../../utils/requests';
 import s from './About.module.css';
 
-export const About = ({ id, movieDesc }) => {
+export const About = ({ movieDesc }) => {
 
     let [about, setAbout] = useState(null);
+    const { id } = useParams()
 
     useEffect(() => {
         const fetchAdditionalData = async (id) => {
