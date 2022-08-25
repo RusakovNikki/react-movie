@@ -38,10 +38,10 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
             setMovieData(result);
         } catch (error) {
             setError(error.message);
-            console.log('error: ', error);
+            // console.log('error: ', error);
         }
         setLoaded(true);
-        console.log('MovieData: ', movieData);
+        // console.log('MovieData: ', movieData);
     }
 
     useEffect(() => {

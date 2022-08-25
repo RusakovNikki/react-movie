@@ -1,9 +1,8 @@
-/*************  НЕ ИСПОЛЬЗУЕТСЯ ПОКА ЧТО ****************/
 import { API_URL, urlHeaders } from "../constants";
 
 /*Дополнительная информация на hover*/
-
-export const getFilmData = async (id) => {
+/* мы каждый раз будем при наведении делать запрос?😿 (Настя) */
+export const getFilmData = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}`, {
             method: 'GET',
@@ -17,7 +16,7 @@ export const getFilmData = async (id) => {
 
 /*Пункты 2.6-2.8 ТЗ Юля*/
 
-export const fetchTrailer = async (id) => {
+export const fetchTrailer = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/videos`, {
             method: 'GET',
@@ -29,7 +28,7 @@ export const fetchTrailer = async (id) => {
     }
 };
 
-export const fetchFacts = async (id) => {
+export const fetchFacts = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/facts`, {
             method: 'GET',
@@ -41,7 +40,7 @@ export const fetchFacts = async (id) => {
     }
 };
 
-export const fetchAwards = async (id) => {
+export const fetchAwards = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/awards`, {
             method: 'GET',
@@ -54,7 +53,7 @@ export const fetchAwards = async (id) => {
 };
 
 /**Настя */
-export const fetchAbout = async (id) => {
+export const fetchAbout = async(id) => {
     const URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`;
     try {
         const result = await fetch(URL, {

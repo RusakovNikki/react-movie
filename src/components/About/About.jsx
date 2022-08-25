@@ -9,8 +9,7 @@ export const About = ({ id, movieDesc }) => {
     useEffect(() => {
         const fetchAdditionalData = async (id) => {
             const about = await fetchAbout(id);
-            if (about) setAbout(about);
-            console.log(about);
+            if (about) setAbout(about); 
         }
         fetchAdditionalData(id);
     }, [id]);

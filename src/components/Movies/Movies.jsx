@@ -33,12 +33,12 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
             setTimeout(() => ref.current.className = 'preloader--unvisible', 3000) /* Удаление прелоадера */
         }
     }, [])
-    console.log(movies.length)
+    // console.log(movies.length)
 
     /* Обработчик собития на скролл для работы автопагинации */
     useEffect(() => {
-        document.addEventListener('scroll', scrollHandler);
-        return () => document.removeEventListener('scroll', scrollHandler)
+        document.addEventListener('scroll', scrollHandler); //componentDidMount && componentDidUpdate
+        return () => document.removeEventListener('scroll', scrollHandler) // componentWillUnmount 
     }, []);
 
     useEffect(() => {

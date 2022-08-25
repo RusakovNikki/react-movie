@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { getRandomId } from '../../functions/getRandomId';
+import uniqid from 'uniqid';
 import s from './Fact.module.css';
 import { getFacts } from './getFacts';
 
@@ -23,7 +23,7 @@ export const Fact = ({ id }) => {
                 </div>
                 {facts.map(fact => (
                     <p
-                        key={getRandomId(1, 2000)}
+                        key={uniqid()}
                         className={s.fact__item}
                     >
                         {fact}
