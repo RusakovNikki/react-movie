@@ -1,15 +1,15 @@
 import { getShortDesc } from './functions/getShortDesc';
 import s from './MovieDesc.module.css';
 
-export const MovieDesc = ({ movieData }) => {
-    if (movieData !== null) {
+export const MovieDesc = ({ movieDesc }) => {
+    if (movieDesc !== null) {
         return (
             <div className={s.description}>
-                <div className={s.description__text}>Описание: {getShortDesc(movieData.description)}</div>
-                <div className={s.description__kpRate}>Кинопоиск: {movieData.ratingKinopoisk}</div>
-                <div className={s.description__imdbRate}>IMDb: {movieData.ratingImdb}</div>
-                <div className={s.description__year}>Год выпуска: {movieData.year}</div>
-                <div className={s.description__duration}>Длительность: {movieData.filmLength} мин</div>
+                <div className={s.description__text}>Описание: {getShortDesc(movieDesc.description)}</div>
+                <div className={s.description__kpRate}>Кинопоиск: {movieDesc.ratingKinopoisk}</div>
+                <div className={s.description__imdbRate}>IMDb: {movieDesc.ratingImdb}</div>
+                <div className={s.description__year}>Год выпуска: {movieDesc.year}</div>
+                <div className={s.description__duration}>Длительность: {movieDesc.filmLength} мин</div>
             </div>
         );
     }

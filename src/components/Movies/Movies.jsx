@@ -22,7 +22,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
     /* Никита */
     const scrollHandler = useCallback(e => {
         let checkPositionAfterBottom = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
-
+        // здесь что-то не так работает и приложение падает, если быстро скролить. кажется countPagesOfPagination неверно считается
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             showElements(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
             setPages(countPagesOfPagination++)
@@ -32,8 +32,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
             setTimeout(() => { setScrolled(false) }, 2000);
             setTimeout(() => ref.current.className = 'preloader--unvisible', 3000) /* Удаление прелоадера */
         }
-    }, [])
-    // console.log(movies.length)
+    }, []) 
 
     /* Обработчик события на скролл для работы автопагинации */
     useEffect(() => {
@@ -71,7 +70,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
             )
     }, [url]);
 
-    if (error) {
+    if (error) { // нужно обработать ошибку так, чтобы с главной не пропадали все фильмы при возникновении ошибки
         return <div>Ошибка: {error.message}</div>
     } else if (!isLoaded) {
         return <div className='preloader'>
@@ -86,12 +85,8 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
                         to={`/film/${movie.filmId}`}>
                         <Movie
                             key={movie.filmId}
-                            id={movie.filmId}
+                            movie={movie}
                             onClick={handleClick}
-                            name={movie.nameRu}
-                            foto={movie.posterUrl}
-                            rating={movie.rating}
-                            genresStr={movie.genres}
                             getMovieDesc={getMovieDesc}
                         />
                     </Link>

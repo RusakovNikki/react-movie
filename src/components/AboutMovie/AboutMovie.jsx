@@ -15,11 +15,11 @@ export const AboutMovie = ({ movie, movieDesc }) => {
         JSON.parse(localStorage.getItem('movie'))
 
     const movieCurrent = JSON.stringify(movie) !== '{}' ? movie : movieSafe /* если нет данных, то movie пустой, а {} === true, поэтому делаю такою проверку */
-    const id = movieCurrent.id
-    const name = movieCurrent.name
-    const foto = movieCurrent.foto
+    const id = movieCurrent.filmId
+    const name = movieCurrent.nameRu
+    const foto = movieCurrent.posterUrl
     const rating = movieCurrent.rating
-    const genresStr = movieCurrent.genresStr.map(a => Object.values(a)).join(", ");
+    const genresStr = movieCurrent.genres.map(a => Object.values(a)).join(", ");
 
     return (
         <div className={s.aboutMovie__wrapper}>

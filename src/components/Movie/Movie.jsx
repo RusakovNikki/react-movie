@@ -7,18 +7,22 @@ import './Movie.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
 
-export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc }) => {
-    let [movieData, setMovieData] = useState(null);
+export const Movie = ({ movie, onClick, getMovieDesc }) => {
+    let [movieDesc, setMovieDesc] = useState(null);
     let [error, setError] = useState(null);
     let [loaded, setLoaded] = useState(false);
 
-    const movieInfo = {
-        id: id,
-        name: name,
-        foto: foto,
-        rating: rating,
-        genresStr: genresStr
-    }
+    const movieInfo = movie;
+
+    const id = movie.filmId;
+    const name = movie.nameRu;
+    const foto = movie.posterUrl;
+    const rating = movie.rating;
+    const genres = movie.genres;
+    const genresStr = genres.map((a) => Object.values(a)).join(', ');
+
+    const ratingColor = rating < 5 ? '_red' : rating < 8 && rating >= 5 ? '_yellow' : '_green';
+ 
 
     /* Добавляем анимацию появления элементов */
     useEffect(() => {
@@ -32,26 +36,23 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
     }
 
     /* Получение данных для hover */
-    const fetchAdditionalData = async (id) => {
-        try {
-            const result = await getFilmData(id);
-            setMovieData(result);
-        } catch (error) {
-            setError(error.message);
-            // console.log('error: ', error);
-        }
-        setLoaded(true);
-        // console.log('MovieData: ', movieData);
+    const fetchAdditionalData = async (id) => { 
+            try {
+                const result = await getFilmData(id);
+                setMovieDesc(result);
+            } catch (error) {
+                setError(error.message);
+                // console.log('error: ', error);
+            }
+            setLoaded(true); 
+        // console.log('movieDesc: ', movieDesc);
     }
 
     useEffect(() => {
-        getMovieDesc(movieData); // Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
+        getMovieDesc(movieDesc); // Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
     })
 
-    genresStr = genresStr.map((a) => Object.values(a)).join(', ')
 
-    /* Цвет кружочка рейтинга */
-    let ratingColor = rating < 5 ? '_red' : rating < 8 && rating >= 5 ? '_yellow' : '_green';
 
     return (
         <div className='movie' onClick={handleClick}>
@@ -59,7 +60,7 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
                 data-aos='fade-zoom-in' /* Анимация библиотеки Aos */
                 data-aos-delay='200'
                 data-aos-offset='0'
-                onMouseOver={() => fetchAdditionalData(id)}
+                onMouseOver={movieDesc ? null : () => fetchAdditionalData(id)}  // поставила проверочку, чтобы запрос делался только 1 раз 🥺
                 className={'movie__img'}
             />
             <div className='movie__dark_hover'></div>
@@ -69,7 +70,7 @@ export const Movie = ({ id, name, foto, rating, genresStr, onClick, getMovieDesc
                 <p className='movie__genre text-movie'>{genresStr}</p>
             </div>
             <div className={'movie__hoverDesc'}>
-                <MovieDesc movieData={movieData} />
+                <MovieDesc movieDesc={movieDesc} />
             </div>
         </div>
     );
