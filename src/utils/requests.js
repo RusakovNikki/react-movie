@@ -1,7 +1,20 @@
 import { API_URL, urlHeaders } from "../constants";
 
-/*Дополнительная информация на hover*/
-export const getFilmData = async(id) => {
+/* Делаем один fetch 😿 */
+export const fetchData = async(url) => {
+    try {
+        const result = await fetch(url, {
+            method: 'GET',
+            headers: urlHeaders,
+        });
+        return result.json();
+    } catch (error) {
+        return {};
+    }
+};
+
+/*Дополнительная информация на hover*/ // заменила на fetchData с подстановкой url
+/* export const getFilmData = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}`, {
             method: 'GET',
@@ -11,11 +24,10 @@ export const getFilmData = async(id) => {
     } catch (error) {
         return {};
     }
-};
+}; */
 
-/*Пункты 2.6-2.8 ТЗ Юля*/
-
-export const fetchTrailer = async(id) => {
+/*Пункты 2.6-2.8 ТЗ Юля*/ // заменила на fetchData с подстановкой url
+/* export const fetchTrailer = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/videos`, {
             method: 'GET',
@@ -25,8 +37,8 @@ export const fetchTrailer = async(id) => {
     } catch (error) {
         return {};
     }
-};
-
+}; */
+/* 
 export const fetchFacts = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/facts`, {
@@ -37,9 +49,9 @@ export const fetchFacts = async(id) => {
     } catch (error) {
         return {};
     }
-};
+}; */
 
-export const fetchAwards = async(id) => {
+/* export const fetchAwards = async(id) => {
     try {
         const result = await fetch(`${API_URL}/films/${id}/awards`, {
             method: 'GET',
@@ -49,10 +61,10 @@ export const fetchAwards = async(id) => {
     } catch (error) {
         return {};
     }
-};
+}; */
 
 /**Настя */
-export const fetchAbout = async(id) => {
+/* export const fetchAbout = async(id) => {
     const URL = `https://kinopoiskapiunofficial.tech/api/v2.2/films/${id}/box_office`;
     try {
         const result = await fetch(URL, {
@@ -63,7 +75,7 @@ export const fetchAbout = async(id) => {
     } catch (error) {
         return {};
     }
-};
+}; */
 
 /* получить список фильмов по ключевым словам
 Эта функция нужна вообще? (Юля)

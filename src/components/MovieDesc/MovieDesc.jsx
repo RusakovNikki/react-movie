@@ -2,6 +2,7 @@ import { getShortDesc } from './functions/getShortDesc';
 import s from './MovieDesc.module.css';
 
 export const MovieDesc = ({ movieDesc }) => {
+    /* console.log('movieDesc', movieDesc); */
     if (movieDesc !== null) {
         return (
             <div className={s.description}>

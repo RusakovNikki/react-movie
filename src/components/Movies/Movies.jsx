@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { urlHeaders } from '../../constants';
-import spinner from '../../images/spinner.svg'
 import { Movie } from '../Movie/Movie';
+import { Preloader } from '../Preloader/Preloader';
 import './Movies.css';
 
 export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
@@ -25,6 +25,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
         // здесь что-то не так работает и приложение падает, если быстро скролить. кажется countPagesOfPagination неверно считается
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             showElements(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
+           
             setPages(countPagesOfPagination++)
             setScrolled(true)
 
@@ -32,18 +33,17 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
             setTimeout(() => { setScrolled(false) }, 2000);
             setTimeout(() => ref.current.className = 'preloader--unvisible', 3000) /* Удаление прелоадера */
         }
-    }, []) 
+    }, [])
 
     /* Обработчик события на скролл для работы автопагинации */
     useEffect(() => {
-        document.addEventListener('scroll', scrollHandler); //componentDidMount && componentDidUpdate
-        return () => document.removeEventListener('scroll', scrollHandler) // componentWillUnmount 
+        document.addEventListener('scroll', scrollHandler); /* componentDidMount */ 
+        return () => document.removeEventListener('scroll', scrollHandler) /* componentWillUnmount */
     }, []);
 
-    useEffect(() => {
-
-        /* делаем запрос на сервер для отображения фильмов */
-        /* Настя */
+    /* componentDidUpdate */ 
+    useEffect(() => { 
+        
 
         const urlParams = {
             method: 'GET',
@@ -70,19 +70,16 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
             )
     }, [url]);
 
-    if (error) { // нужно обработать ошибку так, чтобы с главной не пропадали все фильмы при возникновении ошибки
+    if (error) { // нужно обработать ошибку так, чтобы с главной не пропадали все фильмы
         return <div>Ошибка: {error.message}</div>
     } else if (!isLoaded) {
-        return <div className='preloader'>
-            <img alt='Загрузка...' src={spinner} width='150' height='150' />
-        </div>
+        return   <Preloader ref={ref} styles='' />
     } else {
         return <>
             <div className='main__body main__body--margin'>
                 {movies.map((movie) => {
 
-                    return <Link key={movie.filmId}
-                        to={`/film/${movie.filmId}`}>
+                    return <Link key={movie.filmId} to={`/film/${movie.filmId}`}>
                         <Movie
                             key={movie.filmId}
                             movie={movie}
@@ -94,9 +91,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
                 )}
             </div>
 
-            <div className='preloader preloader--unvisible' ref={ref}>
-                <img alt='' src={spinner} width='100' height='100' />
-            </div>
+            <Preloader ref={ref} styles='preloader--unvisible' />
         </>
     }
 

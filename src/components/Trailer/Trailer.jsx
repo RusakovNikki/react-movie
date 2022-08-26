@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getTrailer } from './getTrailer';
 import s from './Trailer.module.css';
+import { API_URL } from "../../constants";
 
 export const Trailer = () => {
     let [trailer, setTrailer] = useState(null);
-    const { id } = useParams()
+    const { id } = useParams();
+    const url = `${API_URL}/films/${id}/videos`;
 
     useEffect(() => {
-        const fetchAdditionalData = async (id) => {
-            const trailer = await getTrailer(id);
+        const fetchAdditionalData = async (url) => {
+            const trailer = await getTrailer(url);
             setTrailer(trailer);
         }
-        fetchAdditionalData(id);
-    }, [id]);
+        fetchAdditionalData(url);
+    }, [url]);
  
     return (trailer && // поставила такую проверку, чтобы пустое окошко без трейлера не выводилось
         <div className={s.trailer__wrapper}>

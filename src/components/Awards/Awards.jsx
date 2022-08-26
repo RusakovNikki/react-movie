@@ -4,19 +4,20 @@ import { getAwards } from './getAwards';
 import { Award } from '../Award/Award';
 import { getRandomId } from '../../functions/getRandomId';
 import { useParams } from 'react-router-dom';
+import { API_URL } from "../../constants";
 
 export const Awards = () => {
     let [awards, setAwards] = useState(null);
     const { id } = useParams()
-    /* Нам точно нужна такая конструкция с fetchAdditionalData? (Настя). Вроде бы да, так как иначе возвращается промис (Юля)*/
+    const url = `${API_URL}/films/${id}/awards`; 
 
     useEffect(() => {
-        const fetchAdditionalData = async (id) => {
-            const awards = await getAwards(id);
+        const fetchAdditionalData = async (url) => {
+            const awards = await getAwards(url);
             if (awards) setAwards(awards);
         }
-        fetchAdditionalData(id);
-    }, [id]);
+        fetchAdditionalData(url);
+    }, [url]);
 
     //Если у фильма нет наград, выведется сообщение
 

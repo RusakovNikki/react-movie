@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchAbout } from '../../utils/requests';
+import { fetchData } from '../../utils/requests';
 import s from './About.module.css';
+import { API_URL } from "../../constants";
 
 export const About = ({ movieDesc }) => {
 
     let [about, setAbout] = useState(null);
-    const { id } = useParams()
+    const { id } = useParams();
+    const url = `${API_URL}/films/${id}/box_office`;
 
     useEffect(() => {
-        const fetchAdditionalData = async (id) => {
-            const about = await fetchAbout(id);
-            if (about) setAbout(about); 
+        const fetchAdditionalData = async (url) => {
+            const about = await fetchData(url);
+            if (about) setAbout(about);
         }
-        fetchAdditionalData(id);
-    }, [id]);
+        fetchAdditionalData(url);
+    }, [url]);
 
 
     if (about) {   //Условие нужно, чтобы не падать в ошибку, так как изначально все переменные в верстке не существуют до тех пор, пока пользователь не наведет на него мышкой

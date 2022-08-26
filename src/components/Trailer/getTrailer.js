@@ -1,11 +1,11 @@
-import { fetchTrailer } from '../../utils/requests';
+import { fetchData } from '../../utils/requests';
 
 /* Функция возвращает только трейлеры с YouTube. API возвращает 10+ различных видео (Youtube или виджет Кинопоиска).
 Позже заметила, что не у всех фильмов есть трейлер с YouTube, потом доработаю функцию. */
 /* Юля */
 
-export const getTrailer = async(id) => {
-    const trailers = await fetchTrailer(id);
+export const getTrailer = async(url) => {
+    const trailers = await fetchData(url);
     const trailer = trailers.items.find(item => {
         return item.site === 'YOUTUBE';
     });
