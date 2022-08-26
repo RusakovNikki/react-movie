@@ -10,11 +10,11 @@ export const Trailer = () => {
     const url = `${API_URL}/films/${id}/videos`;
 
     useEffect(() => {
-        const fetchAdditionalData = async (url) => {
+        const asyncFetch = async (url) => {
             const trailer = await getTrailer(url);
             setTrailer(trailer);
         }
-        fetchAdditionalData(url);
+        asyncFetch(url);
     }, [url]);
  
     return (trailer && // поставила такую проверку, чтобы пустое окошко без трейлера не выводилось

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Movies } from "../Movies/Movies";
 import { AboutMovie } from "../AboutMovie/AboutMovie";
 
-export const Main = ({ url, showElements }) => {
+export const Main = ({ url, setNewUrl }) => {
     const [movieDesc, setMovieDesc] = useState(null);
     const [currMovie, setCurrMovie] = useState({}); // фильм, на который кликнули
 
@@ -13,20 +13,20 @@ export const Main = ({ url, showElements }) => {
 
     //Функция нужна для записи в стейт описания фильма, которое получаем из апи в другой компоненте, чтобы несколько раз не делать вызов (Юля)
 
-    const getMovieDesc = (value) => {
+   /*  const getMovieDesc = (value) => {
         if (value && value !== null)
             setMovieDesc(value.description);
-    }
+    } */
 
     return (
     <main className="main">
         <Routes>
             <Route path='/' element={
-                <Movies url={url} onClick={handleClick} showElements={showElements} getMovieDesc={getMovieDesc} />
+                <Movies url={url} onClick={handleClick} setNewUrl={setNewUrl} /* getMovieDesc={getMovieDesc} */ />
             }>
             </Route>
             <Route path='/film/:id' element={
-                <AboutMovie movie={currMovie} movieDesc={movieDesc} />
+                <AboutMovie movie={currMovie} /* movieDesc={movieDesc} */ />
             }>
             </Route>
         </Routes>

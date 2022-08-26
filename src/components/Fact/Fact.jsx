@@ -12,11 +12,11 @@ export const Fact = () => {
     const url = `${API_URL}/films/${id}/facts`;
 
     useEffect(() => {
-        const fetchAdditionalData = async () => {
+        const asyncFetch = async () => {
             const facts = await getFacts(url);
             if (facts) setFacts(facts);
         }
-        fetchAdditionalData();
+        asyncFetch();
     }, [url]);
 
     if (facts) {

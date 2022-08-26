@@ -9,7 +9,7 @@ import './Movie.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
 
-export const Movie = ({ movie, onClick, getMovieDesc }) => {
+export const Movie = ({ movie, onClick/* , getMovieDesc */ }) => {
     let [movieDesc, setMovieDesc] = useState(null);
     let [error, setError] = useState(null);
     let [loaded, setLoaded] = useState(false);
@@ -37,7 +37,7 @@ export const Movie = ({ movie, onClick, getMovieDesc }) => {
     }
 
     /* Получение данных для hover */
-    const fetchAdditionalData = async (id) => {
+    const asyncFetch = async (id) => {
         const url = `${API_URL}/films/${id}`;
         try {
             const result = await fetchData(url); // этот запрос дает нам расширенную инфу по конкретному фильму, поэтому сохраняем ответ с сервера и передаем по клику в AboutMovie
@@ -50,14 +50,14 @@ export const Movie = ({ movie, onClick, getMovieDesc }) => {
         // console.log('movieDesc: ', movieDesc);
     }
 
-    useEffect(() => {
+  /*   useEffect(() => {
         getMovieDesc(movieDesc); // Передаем данные о фильме в функцию, чтобы поднять их наверх по компонентам и не вызывать апи заново в карточке фильма
-    })
+    }) */
 
 
 
     return (
-        <div className='movie' onClick={handleClick} onMouseOver={movieDesc ? null : () => fetchAdditionalData(id)} >  {/*  поставила проверочку, чтобы запрос делался только 1 раз 🥺 */}
+        <div className='movie' onClick={handleClick} onMouseOver={movieDesc ? null : () => asyncFetch(id)} >  {/*  поставила проверочку, чтобы запрос делался только 1 раз 🥺 */}
             <div className='movie__dark_hover'></div>
             <img alt={name} src={foto}
                 data-aos='fade-zoom-in' /* Анимация библиотеки Aos */

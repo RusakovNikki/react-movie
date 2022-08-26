@@ -9,7 +9,7 @@ export const fetchData = async(url) => {
         });
         return result.json();
     } catch (error) {
-        return {};
+        return error;
     }
 };
 

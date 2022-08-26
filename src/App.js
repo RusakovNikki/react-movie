@@ -10,14 +10,14 @@ export const App = () => {
 
   const [url, setUrl] = useState(TOP20_URL); // ссылка, по которой мы делаем запрос на сервер (по умолчанию выводим на главной топ-20)
 
-  const handleSearch = (searchUrl) => {
-    setUrl(searchUrl)
+  const handleUrl = (newUrl) => {
+    setUrl(newUrl)
   }
 
   return (
     <>
-      <Header onSearch={handleSearch} />
-      <Main url={url} showElements={handleSearch} />
+      <Header onSearch={handleUrl} />
+      <Main url={url} setNewUrl={handleUrl} />
       <Footer />
     </>
   )

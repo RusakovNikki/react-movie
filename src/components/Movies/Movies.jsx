@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { urlHeaders } from '../../constants';
+import { Link } from 'react-router-dom'; 
 import { Movie } from '../Movie/Movie';
 import { Preloader } from '../Preloader/Preloader';
 import './Movies.css';
+import { fetchData } from '../../utils/requests';
 
-export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
+export const Movies = ({ url, onClick, setNewUrl/*,  getMovieDesc */ }) => {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [movies, setMovies] = useState([]);
@@ -24,8 +24,8 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
         let checkPositionAfterBottom = e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight)
         // здесь что-то не так работает и приложение падает, если быстро скролить. кажется countPagesOfPagination неверно считается
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
-            showElements(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
-           
+            setNewUrl(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
+
             setPages(countPagesOfPagination++)
             setScrolled(true)
 
@@ -37,43 +37,38 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
 
     /* Обработчик события на скролл для работы автопагинации */
     useEffect(() => {
-        document.addEventListener('scroll', scrollHandler); /* componentDidMount */ 
+        document.addEventListener('scroll', scrollHandler); /* componentDidMount */
         return () => document.removeEventListener('scroll', scrollHandler) /* componentWillUnmount */
     }, []);
 
-    /* componentDidUpdate */ 
-    useEffect(() => { 
-        
+    /* componentDidUpdate */
+    useEffect(() => {
 
-        const urlParams = {
-            method: 'GET',
-            headers: urlHeaders,
-        };
+        const asyncFetch = async (url) => {
+            const result = await fetchData(url);
+            if (result) {
+                setIsLoaded(true);
+                setMovies(films => {
+                    if (result.films.length < 20) {
+                        document.removeEventListener('scroll', scrollHandler)
+                        return result.films
+                    }
+                    else return [...films, ...result.films]
+                });
+            } else {
+                setIsLoaded(true);
+                setError(result);
+            }
 
-        fetch(url, urlParams)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setMovies(films => {
-                        if (result.films.length < 20) {
-                            document.removeEventListener('scroll', scrollHandler)
-                            return result.films
-                        }
-                        else return [...films, ...result.films]
-                    });
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
+        }
+        asyncFetch(url);
+
     }, [url]);
 
     if (error) { // нужно обработать ошибку так, чтобы с главной не пропадали все фильмы
         return <div>Ошибка: {error.message}</div>
     } else if (!isLoaded) {
-        return   <Preloader ref={ref} styles='' />
+        return <Preloader ref={ref} styles='' />
     } else {
         return <>
             <div className='main__body main__body--margin'>
@@ -84,7 +79,7 @@ export const Movies = ({ url, onClick, showElements, getMovieDesc }) => {
                             key={movie.filmId}
                             movie={movie}
                             onClick={handleClick}
-                            getMovieDesc={getMovieDesc}
+                           /*  getMovieDesc={getMovieDesc} */
                         />
                     </Link>
                 }

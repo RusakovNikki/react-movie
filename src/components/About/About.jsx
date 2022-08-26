@@ -6,16 +6,18 @@ import { API_URL } from "../../constants";
 
 export const About = ({ movieDesc }) => {
 
+    
+
     let [about, setAbout] = useState(null);
     const { id } = useParams();
     const url = `${API_URL}/films/${id}/box_office`;
 
-    useEffect(() => {
-        const fetchAdditionalData = async (url) => {
+    useEffect(() => { 
+        const asyncFetch = async (url) => {
             const about = await fetchData(url);
             if (about) setAbout(about);
         }
-        fetchAdditionalData(url);
+        asyncFetch(url);
     }, [url]);
 
 
@@ -50,7 +52,7 @@ export const About = ({ movieDesc }) => {
                     <p>Бюджет составляет: {budget} {currencySymbol}</p>
                     <p>Бюджет, потраченный на маркетинговые кампании: {marketingBudget} {currencySymbol} </p>
                     <p>Сборы по всему миру составляют: {worldwideGain} {currencySymbol}</p>
-                    <p className={s.about__desc}>{movieDesc}</p>
+                    <p className={s.about__desc}>{movieDesc.description}</p>
                 </div>
             );
         }

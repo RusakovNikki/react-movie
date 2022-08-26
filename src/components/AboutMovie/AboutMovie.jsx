@@ -6,7 +6,7 @@ import { Fact } from '../Fact/Fact';
 import s from './AboutMovie.module.css';
 import { useEffect } from 'react';
 
-export const AboutMovie = ({ movie, movieDesc }) => {
+export const AboutMovie = ({ movie/* , movieDesc */ }) => {
     /* используем веб-хранилище localstorage для хранение информации о фильме при перезагрузке страници */
     /* Никита */
     
@@ -31,7 +31,7 @@ export const AboutMovie = ({ movie, movieDesc }) => {
                     <div className={s.aboutMovie__name}>{name}</div>
                     <div className={s.aboutMovie__rate}>{rating} </div>
                     <div className={s.aboutMovie__genres}>{genresStr} </div>
-                    <About id={id} movieDesc={movieDesc} />
+                    <About id={id} movieDesc={movie} />
                 </div>
             </div>
             <div className={s.aboutMovie__additionalData}>

@@ -12,11 +12,11 @@ export const Awards = () => {
     const url = `${API_URL}/films/${id}/awards`; 
 
     useEffect(() => {
-        const fetchAdditionalData = async (url) => {
+        const asyncFetch = async (url) => {
             const awards = await getAwards(url);
             if (awards) setAwards(awards);
         }
-        fetchAdditionalData(url);
+        asyncFetch(url);
     }, [url]);
 
     //Если у фильма нет наград, выведется сообщение
