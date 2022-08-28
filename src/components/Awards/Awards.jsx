@@ -1,8 +1,8 @@
 import s from './Awards.module.css';
 import React, { useState, useEffect } from 'react';
 import { getAwards } from './getAwards';
-import { Award } from '../Award/Award';
-import { getRandomId } from '../../functions/getRandomId';
+import { Award } from '../Award/Award'; 
+import uniqid from 'uniqid';
 import { useParams } from 'react-router-dom';
 import { API_URL } from "../../constants";
 
@@ -35,7 +35,7 @@ export const Awards = () => {
             {awards && awards.map((award) => {        /* Поставила проверку, что awards != null, потому что иногда почему-то null с сервера возвращается (Настя) */
                 return (
                     <Award
-                        key={getRandomId(1, 1000)}
+                        key={uniqid()}
                         award={award}
                     />
                 )

@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Movies } from "../Movies/Movies";
 import { AboutMovie } from "../AboutMovie/AboutMovie";
 
-export const Main = ({ url, setNewUrl }) => {
-    const [movieDesc, setMovieDesc] = useState(null);
+export const Main = ({ url, onScroll }) => {
+    const [detailedMovie, setMovieDesc] = useState(null);
     const [currMovie, setCurrMovie] = useState({}); // фильм, на который кликнули
 
     const handleClick = (movie) => {
@@ -22,11 +22,11 @@ export const Main = ({ url, setNewUrl }) => {
     <main className="main">
         <Routes>
             <Route path='/' element={
-                <Movies url={url} onClick={handleClick} setNewUrl={setNewUrl} /* getMovieDesc={getMovieDesc} */ />
+                <Movies url={url} onClick={handleClick} onScroll={onScroll} /* getMovieDesc={getMovieDesc} */ />
             }>
             </Route>
             <Route path='/film/:id' element={
-                <AboutMovie movie={currMovie} /* movieDesc={movieDesc} */ />
+                <AboutMovie movie={currMovie} /* detailedMovie={detailedMovie} */ />
             }>
             </Route>
         </Routes>

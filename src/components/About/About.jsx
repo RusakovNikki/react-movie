@@ -4,11 +4,9 @@ import { fetchData } from '../../utils/requests';
 import s from './About.module.css';
 import { API_URL } from "../../constants";
 
-export const About = ({ movieDesc }) => {
-
-    
-
-    let [about, setAbout] = useState(null);
+export const About = ({ detailedMovie }) => {
+ 
+    const [about, setAbout] = useState(null);
     const { id } = useParams();
     const url = `${API_URL}/films/${id}/box_office`;
 
@@ -52,7 +50,7 @@ export const About = ({ movieDesc }) => {
                     <p>Бюджет составляет: {budget} {currencySymbol}</p>
                     <p>Бюджет, потраченный на маркетинговые кампании: {marketingBudget} {currencySymbol} </p>
                     <p>Сборы по всему миру составляют: {worldwideGain} {currencySymbol}</p>
-                    <p className={s.about__desc}>{movieDesc.description}</p>
+                    <p className={s.about__desc}>{detailedMovie.description}</p>
                 </div>
             );
         }

@@ -6,7 +6,7 @@ import { Fact } from '../Fact/Fact';
 import s from './AboutMovie.module.css';
 import { useEffect } from 'react';
 
-export const AboutMovie = ({ movie/* , movieDesc */ }) => {
+export const AboutMovie = ({ movie/* , detailedMovie */ }) => {
     /* используем веб-хранилище localstorage для хранение информации о фильме при перезагрузке страници */
     /* Никита */
     
@@ -14,24 +14,24 @@ export const AboutMovie = ({ movie/* , movieDesc */ }) => {
         localStorage.setItem('movie', JSON.stringify(movie)) :
         JSON.parse(localStorage.getItem('movie'))
 
-    const movieCurrent = JSON.stringify(movie) !== '{}' ? movie : movieSafe /* если нет данных, то movie пустой, а {} === true, поэтому делаю такою проверку */
-    const id = movieCurrent.filmId
-    const name = movieCurrent.nameRu
-    const foto = movieCurrent.posterUrl
-    const rating = movieCurrent.rating
-    const genresStr = movieCurrent.genres.map(a => Object.values(a)).join(", ");
+    const currMovie = JSON.stringify(movie) !== '{}' ? movie : movieSafe /* если нет данных, то movie пустой, а {} === true, поэтому делаю такою проверку */
+    const id = currMovie.filmId
+    const name = currMovie.nameRu
+    const foto = currMovie.posterUrl
+    const rating = currMovie.rating
+    const genresStr = currMovie.genres.map(a => Object.values(a)).join(", ");
 
     return (
         <div className={s.aboutMovie__wrapper}>
             <div className={s.aboutMovie__info}>
                 <div className={s.aboutMovie__imgWrapper}>
-                    <img className={s.aboutMovie__img} src={foto} />
+                    <img alt='about' className={s.aboutMovie__img} src={foto} />
                 </div>
                 <div className={s.aboutMovie__textData}>
                     <div className={s.aboutMovie__name}>{name}</div>
                     <div className={s.aboutMovie__rate}>{rating} </div>
                     <div className={s.aboutMovie__genres}>{genresStr} </div>
-                    <About id={id} movieDesc={movie} />
+                    <About id={id} detailedMovie={currMovie} />
                 </div>
             </div>
             <div className={s.aboutMovie__additionalData}>
