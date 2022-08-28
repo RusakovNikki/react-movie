@@ -5,6 +5,7 @@ import { Movie } from '../Movie/Movie';
 import { Preloader } from '../Preloader/Preloader';
 import './Movies.css';
 import { fetchData } from '../../utils/requests';
+import { Slider } from '../Slider/Slider';
 
 export const Movies = ({ url, onClick, onScroll }) => {
     const [error, setError] = useState(null);
@@ -72,6 +73,9 @@ export const Movies = ({ url, onClick, onScroll }) => {
         return <Preloader ref={ref} styles='' />
     } else {
         return <>
+            <div className="main__slider">
+                <Slider />
+            </div>
             <div className='main__body main__body--margin'>
                 {movies.map((movie) => {
 

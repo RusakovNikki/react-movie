@@ -16,7 +16,7 @@ export const Trailer = () => {
         }
         asyncFetch(url);
     }, [url]);
- 
+
     return (trailer && // поставила такую проверку, чтобы пустое окошко без трейлера не выводилось
         <div className={s.trailer__wrapper}>
             <div className={s.trailer__header}>
