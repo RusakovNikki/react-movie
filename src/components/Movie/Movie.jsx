@@ -8,6 +8,7 @@ import { MovieDesc } from '../MovieDesc/MovieDesc';
 import './Movie.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
+import { Rating } from '../Rating/Rating';
 
 export const Movie = ({ movie, onClick }) => {
     let [detailedMovie, setDetailedMovie] = useState(null);
@@ -22,7 +23,6 @@ export const Movie = ({ movie, onClick }) => {
     const genres = movie.genres;
     const genresStr = genres.map((a) => Object.values(a)).join(', ');
 
-    const ratingColor = rating < 5 ? '_red' : rating < 8 && rating >= 5 ? '_yellow' : '_green';
 
 
     /* Добавляем анимацию появления элементов */
@@ -59,7 +59,7 @@ export const Movie = ({ movie, onClick }) => {
             />
             <div className='movie__description'>
                 <p className='movie__name text-movie'>{name}</p>
-                <p className={'movie__rating' + ratingColor}>{rating}</p>
+                <Rating rating={rating}/>
                 <p className='movie__genre text-movie'>{genresStr}</p>
             </div>
             <div className={'movie__hoverDesc'}>

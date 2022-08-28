@@ -16,6 +16,6 @@
     justify-content: center;
 }
 
-.preloader--unvisible {
+.preloader--invisible {
     display: none;
 }

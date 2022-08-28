@@ -32,7 +32,7 @@ export const Movies = ({ url, onClick, onScroll }) => {
 
             ref.current.className = 'preloader' /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
             setTimeout(() => { setScrolled(false) }, 2000);
-            setTimeout(() => ref.current.className = 'preloader--unvisible', 3000) /* Удаление прелоадера */
+            setTimeout(() => ref.current.className = 'preloader--invisible', 3000) /* Удаление прелоадера */
         }
     }, [])
 
@@ -86,7 +86,7 @@ export const Movies = ({ url, onClick, onScroll }) => {
                 )}
             </div>
 
-            <Preloader ref={ref} styles='preloader--unvisible' />
+            <Preloader ref={ref} styles='preloader--invisible' />
         </>
     }
 
