@@ -10,7 +10,7 @@ import 'aos/dist/aos.css';
 import Aos from 'aos';
 
 export const Movie = ({ movie, onClick }) => {
-    let [detailedMovie, setMovieDesc] = useState(null);
+    let [detailedMovie, setDetailedMovie] = useState(null);
     let [error, setError] = useState(null);
     let [loaded, setLoaded] = useState(false);
 
@@ -39,7 +39,7 @@ export const Movie = ({ movie, onClick }) => {
         const url = `${API_URL}/films/${id}`;
         try {
             const result = await fetchData(url); // этот запрос дает нам расширенную инфу по конкретному фильму, поэтому сохраняем ответ с сервера и передаем по клику в AboutMovie
-            setMovieDesc(result);
+            setDetailedMovie(result);
         } catch (error) {
             setError(error.message);
             // console.log('error: ', error);
