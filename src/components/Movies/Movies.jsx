@@ -27,12 +27,12 @@ export const Movies = ({ url, onClick, onScroll }) => {
         // здесь что-то не так работает и приложение падает, если быстро скролить. кажется countPagesOfPagination неверно считается
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             onScroll(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
-
-            setPages(countPagesOfPagination++)
-            setScrolled(true)
+            setPages(++countPagesOfPagination)
+            setScrolled(scrolled = true)
+            console.log('qq')
 
             ref.current.className = 'preloader' /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
-            setTimeout(() => { setScrolled(false) }, 2000);
+            setTimeout(() => { setScrolled(scrolled = false) }, 2000);
             setTimeout(() => ref.current.className = 'preloader--invisible', 3000) /* Удаление прелоадера */
         }
     }, [])

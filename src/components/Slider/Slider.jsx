@@ -7,6 +7,10 @@ import { API_URL } from "../../constants";
 import { getCurrentMonth } from "../../functions/getCurrentMonth";
 import { getPremiers } from "./getPremiers";
 
+
+import 'aos/dist/aos.css';
+import Aos from 'aos';
+
 export const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [premiers, setPremiers] = useState([]);
@@ -37,7 +41,14 @@ export const Slider = () => {
   };
 
   return (
-    <div className="slider-container">
+    <div className="slider-container"
+      data-aos='fade-zoom-in' /* Анимация библиотеки Aos */
+      data-aos-delay='800'
+      data-aos-offset='0'>
+      <div className="slider__background"
+        style={{ backgroundImage: `url('${premiers.length !== 0 ? premiers[currentSlide].posterUrl : ''}')` }}
+      >
+      </div>
       <button
         className="slider-button left-button"
         onClick={handleLeftButtonClick}

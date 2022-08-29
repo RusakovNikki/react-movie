@@ -19,3 +19,7 @@
 .preloader--invisible {
     display: none;
 }
+
+.main__slider {
+    margin-top: 70px;
+}
