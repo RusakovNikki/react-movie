@@ -74,7 +74,7 @@ export const Movies = ({ url, onClick, onScroll }) => {
     } else {
         return <>
             <div className="main__slider">
-                <Slider />
+                {movies.length < 20 ? "" : <Slider />}
             </div>
             <div className='main__body main__body--margin'>
                 {movies.map((movie) => {

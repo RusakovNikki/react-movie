@@ -16,7 +16,7 @@ export const Header = ({ onSearch }) => {
                         <span>Главная</span>
                     </Link>
                 </div>
-                <Searching onSearch={onSearch} />  {/* если пользователь что-то вводит в поисковую строку, меняется ссылка для Main (Настя) */}
+                <Searching onSearch={onSearch} /> 
             </div>
         </header>
 
