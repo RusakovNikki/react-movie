@@ -9,15 +9,15 @@ import { API_URL } from "../../constants";
 export const Awards = () => {
     let [awards, setAwards] = useState(null);
     const { id } = useParams()
-    const url = `${API_URL}/films/${id}/awards`; 
-
+    
     useEffect(() => {
-        const asyncFetch = async (url) => {
-            const awards = await getAwards(url);
-            if (awards) setAwards(awards);
+        const asyncFetch = async (id) => {
+            const url = `${API_URL}/films/${id}/awards`; 
+            const data = await getAwards(url);
+            if (data) setAwards(data);
         }
-        asyncFetch(url);
-    }, [url]);
+        asyncFetch(id);
+    }, [id]);
 
     //Если у фильма нет наград, выведется сообщение
 

@@ -7,15 +7,15 @@ import { API_URL } from "../../constants";
 export const Trailer = () => {
     let [trailer, setTrailer] = useState(null);
     const { id } = useParams();
-    const url = `${API_URL}/films/${id}/videos`;
-
+    
     useEffect(() => {
-        const asyncFetch = async (url) => {
+        const asyncFetch = async (id) => {
+            const url = `${API_URL}/films/${id}/videos`;
             const trailer = await getTrailer(url);
             setTrailer(trailer);
         }
-        asyncFetch(url);
-    }, [url]);
+        asyncFetch(id);
+    }, [id]);
 
     return (trailer && // поставила такую проверку, чтобы пустое окошко без трейлера не выводилось
         <div className={s.trailer__wrapper}>

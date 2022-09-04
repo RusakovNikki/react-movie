@@ -6,7 +6,7 @@ import { Fact } from '../Fact/Fact';
 import s from './AboutMovie.module.css';
 import { useEffect } from 'react';
 
-export const AboutMovie = ({ movie/* , detailedMovie */ }) => {
+export const AboutMovie = ({ movie }) => {
     /* используем веб-хранилище localstorage для хранение информации о фильме при перезагрузке страници */
     /* Никита */
     

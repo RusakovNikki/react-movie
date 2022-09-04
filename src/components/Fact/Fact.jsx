@@ -9,15 +9,15 @@ import { API_URL } from "../../constants";
 export const Fact = () => {
     let [facts, setFacts] = useState(null);
     const { id } = useParams()
-    const url = `${API_URL}/films/${id}/facts`;
-
+    
     useEffect(() => {
         const asyncFetch = async () => {
-            const facts = await getFacts(url);
-            if (facts) setFacts(facts);
+            const url = `${API_URL}/films/${id}/facts`;
+            const data = await getFacts(url);
+            if (data) setFacts(data);
         }
         asyncFetch();
-    }, [url]);
+    }, [id]);
 
     if (facts) {
         return (

@@ -28,8 +28,7 @@ export const Movies = ({ url, onClick, onScroll }) => {
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             onScroll(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
             setPages(++countPagesOfPagination)
-            setScrolled(scrolled = true)
-            console.log('qq')
+            setScrolled(scrolled = true) 
 
             ref.current.className = 'preloader' /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
             setTimeout(() => { setScrolled(scrolled = false) }, 2000);
