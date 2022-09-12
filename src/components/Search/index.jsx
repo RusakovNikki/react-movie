@@ -2,21 +2,21 @@ import React, { useState } from 'react'
 import './Searching.css'
 
 export const Search = ({ onSearch }) => {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(null);
     const searchURL = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`;
 
     const handleChange = (event) => {
         const input = event.target.value;
-        if (input) { // проверяем, что непустой ввод
-            setSearch(input);
-        }
-        /* если ввод пустой, то выводим все фильмы */
+        setSearch(input);
     }
 
     const handleSubmit = (event) => {
         event.preventDefault(); /* чтобы страничка не перезагружалась */
-        const url = `${searchURL}?keyword=${search}`;
-        onSearch(url)
+        let url = '';
+        if (search !== '') {
+            url = `${searchURL}?keyword=${search}`;
+        }
+        onSearch(url);
     }
 
     return (

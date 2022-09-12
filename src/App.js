@@ -16,7 +16,12 @@ export const App = () => {
   const [currMovie, setCurrMovie] = useState({});
 
   const handleUrl = (newUrl) => {
-    setUrl(newUrl)
+    if (newUrl === '') {
+      setUrl(TOP20_URL); // если пустой поиск
+    }
+    else {
+      setUrl(newUrl)
+    }
   }
 
   const handleClick = (movie) => {
