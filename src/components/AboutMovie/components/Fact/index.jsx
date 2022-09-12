@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; 
 import uniqid from 'uniqid';
 import s from './Fact.module.css';
-import { getFacts } from './getFacts';
-import { API_URL } from "../../constants";
+import { getFacts } from './functions/getFacts';
+import { API_URL } from "../../../../constants";
 
 export const Fact = () => {
     let [facts, setFacts] = useState(null);

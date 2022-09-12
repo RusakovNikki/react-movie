@@ -1,15 +1,13 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Slider.css";
-import rightIcon from "../../images/right-icon1.png";
-import leftIcon from "../../images/left-icon1.png";
-import { API_URL } from "../../constants";
-import { getCurrentMonth } from "../../functions/getCurrentMonth";
-import { getPremiers } from "./getPremiers";
+import rightIcon from "./img/right-icon1.png";
+import leftIcon from "./img/left-icon1.png";
+import { API_URL } from "../../../../constants";
+import { getCurrentMonth } from "./functions/getCurrentMonth";
+import { getPremiers } from "./functions/getPremiers";
 
 
 import 'aos/dist/aos.css';
-import Aos from 'aos';
 
 export const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

@@ -1,5 +1,5 @@
 
-import { Searching } from '../Search/Searching';
+import { Search } from '../Search';
 import logo from './img/logo.png'
 import './Header.css'
 
@@ -16,7 +16,7 @@ export const Header = ({ onSearch }) => {
                         <span>Главная</span>
                     </Link>
                 </div>
-                <Searching onSearch={onSearch} /> 
+                <Search onSearch={onSearch} /> 
             </div>
         </header>
 

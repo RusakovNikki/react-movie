@@ -1,10 +1,9 @@
 import React from 'react';
-import { Trailer } from '../Trailer/Trailer';
-import { Awards } from '../Awards/Awards';
-import { About } from '../About/About';
-import { Fact } from '../Fact/Fact';
-import s from './AboutMovie.module.css';
-import { useEffect } from 'react';
+import { Trailer } from './components/Trailer';
+import { Awards } from './components/Awards';
+import { About } from './components/About';
+import { Fact } from './components/Fact';
+import s from './AboutMovie.module.css'; 
 
 export const AboutMovie = ({ movie }) => {
     /* используем веб-хранилище localstorage для хранение информации о фильме при перезагрузке страници */

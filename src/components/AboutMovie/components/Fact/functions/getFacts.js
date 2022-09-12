@@ -1,4 +1,4 @@
-import { fetchData } from '../../utils/requests';
+import { fetchData } from '../../../../../utils/requests';
 import { cutOutTags } from './cutOutTags';
 /*Функция получает только 5 фактов (API возвращает по 25+)*/
 /* Юля */

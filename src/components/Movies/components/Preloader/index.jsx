@@ -1,4 +1,4 @@
-import spinner from '../../images/spinner.svg'
+import spinner from './img/spinner.svg'
 import React, { forwardRef } from 'react';
 
 export const Preloader = forwardRef(({styles}, ref) => {

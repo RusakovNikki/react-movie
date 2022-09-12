@@ -1,14 +1,13 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { fetchData } from '../../utils/requests';
-import { API_URL } from "../../constants";
+import React, { useEffect, useState } from 'react'; 
+import { fetchData } from '../../../../utils/requests';
+import { API_URL } from "../../../../constants";
 
-import { MovieDesc } from '../MovieDesc/MovieDesc';
+import { MovieDesc } from './components/MovieDesc';
+import { Rating } from './components/Rating';
+
 import './Movie.css';
 import 'aos/dist/aos.css';
 import Aos from 'aos';
-import { Rating } from '../Rating/Rating';
 
 export const Movie = ({ movie, onClick }) => {
     let [detailedMovie, setDetailedMovie] = useState(null);

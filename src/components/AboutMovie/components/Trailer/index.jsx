@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getTrailer } from './getTrailer';
+import { getTrailer } from './functions/getTrailer';
 import s from './Trailer.module.css';
-import { API_URL } from "../../constants";
+import { API_URL } from "../../../../constants";
 
 export const Trailer = () => {
     let [trailer, setTrailer] = useState(null);

@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Movie } from '../Movie/Movie';
-import { Preloader } from '../Preloader/Preloader';
-import './Movies.css';
 import { fetchData } from '../../utils/requests';
-import { Slider } from '../Slider/Slider';
+
+import './styles.css';
+
+import { Preloader } from './components/Preloader';
+import { Movie } from './components/Movie';
+import { Slider } from './components/Slider';
 
 export const Movies = ({ url, onClick, onScroll }) => {
     const [error, setError] = useState(null);
@@ -28,7 +29,7 @@ export const Movies = ({ url, onClick, onScroll }) => {
         if (checkPositionAfterBottom < 800 && !scrolled) { /* Переменная проверяет, произведен ли скролл до конца страницы */
             onScroll(`https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${countPagesOfPagination}`)
             setPages(++countPagesOfPagination)
-            setScrolled(scrolled = true) 
+            setScrolled(scrolled = true)
 
             ref.current.className = 'preloader' /* Запуск прелоадера с задержкой, чтобы было видно, что она появляется */
             setTimeout(() => { setScrolled(scrolled = false) }, 2000);

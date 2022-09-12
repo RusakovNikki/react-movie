@@ -1,4 +1,4 @@
-import { fetchData } from "../../utils/requests";
+import { fetchData } from "../../../../../utils/requests";
 
 export const getPremiers = async(url) => {
     const premiers = await fetchData(url);

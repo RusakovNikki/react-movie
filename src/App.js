@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import './App.css';
-import { AboutMovie } from './components/AboutMovie/AboutMovie';
-import { Footer } from './components/Footer/Footer';
-import { Header } from './components/Header/Header';
-import { Movies } from './components/Movies/Movies';
+
+import { AboutMovie } from './components/AboutMovie';
+import { Footer } from './components/Footer';
+import { Header } from './components/Header';
+import { Movies } from './components/Movies';
+
 import { TOP20_URL } from './constants';
 
 export const App = () => {

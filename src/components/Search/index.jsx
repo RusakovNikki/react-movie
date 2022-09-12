@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Searching.css'
 
-export const Searching = ({ onSearch }) => {
+export const Search = ({ onSearch }) => {
     const [search, setSearch] = useState('');
     const searchURL = `https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword`;
 

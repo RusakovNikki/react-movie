@@ -1,10 +1,10 @@
 import s from './Awards.module.css';
 import React, { useState, useEffect } from 'react';
-import { getAwards } from './getAwards';
-import { Award } from '../Award/Award'; 
+import { getAwards } from './functions/getAwards';
+import { Award } from './components/Award'; 
 import uniqid from 'uniqid';
 import { useParams } from 'react-router-dom';
-import { API_URL } from "../../constants";
+import { API_URL } from "../../../../constants";
 
 export const Awards = () => {
     let [awards, setAwards] = useState(null);
