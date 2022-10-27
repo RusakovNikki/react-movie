@@ -1,0 +1,25 @@
+.main__body {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.main__body--margin {
+    margin-bottom: 30px;
+}
+
+.preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preloader--invisible {
+    display: none;
+}
+
+.main__slider {
+    margin-top: 70px;
+}
